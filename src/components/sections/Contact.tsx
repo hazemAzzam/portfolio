@@ -9,13 +9,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { ControlledInput } from "../ui/controlled/controlled-input";
 import { Button } from "../ui/button";
-import {
-  LuGithub,
-  LuLinkedin,
-  LuMail,
-  LuMapPin,
-  LuPhone,
-} from "react-icons/lu";
+import { LuGithub, LuLinkedin, LuMail, LuMapPin } from "react-icons/lu";
 import { ControlledTextarea } from "../ui/controlled/controlled-textarea";
 import { FaWhatsapp } from "react-icons/fa";
 

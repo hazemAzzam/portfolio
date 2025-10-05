@@ -3,7 +3,6 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
-import { ModeToggle } from "../ui/mode-toggle";
 import { MenuIcon } from "lucide-react";
 import {
   DropdownMenu,
