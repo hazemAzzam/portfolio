@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { LuGithub, LuLinkedin, LuMail } from "react-icons/lu";
 import { AnimatedGroup } from "../../../components/motion-primitives/animated-group";
 import AnimatedScrollToButton from "../ui/animatedScrollToButton";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -41,9 +42,11 @@ export default function Hero() {
             optimization, and innovative solutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button size="lg">View my work</Button>
+            <Button size="lg">
+              <Link href="/projects">View my work</Link>
+            </Button>
             <Button variant="outline" size="lg">
-              Contact me
+              <Link href="/#contact">Contact me</Link>
             </Button>
           </div>
           <div className="flex justify-center space-x-6 mb-12">

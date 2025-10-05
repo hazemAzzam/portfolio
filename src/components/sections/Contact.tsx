@@ -17,6 +17,7 @@ import {
   LuPhone,
 } from "react-icons/lu";
 import { ControlledTextarea } from "../ui/controlled/controlled-textarea";
+import { FaWhatsapp } from "react-icons/fa";
 
 const contactFormSchema = z.object({
   name: z.string().min(1),
@@ -43,7 +44,8 @@ export default function Contact() {
   return (
     <Section
       id="contact"
-      className="flex flex-col items-center justify-center gap-12 w-full"
+      className="flex flex-col items-center justify-center w-full"
+      containerClassName="space-y-12"
     >
       <motion.div
         initial={{ opacity: 0, y: 100 }}
@@ -136,7 +138,7 @@ export default function Contact() {
           <div className="flex flex-col gap-4">
             <h3 className="text-xl text-left">Contact Information</h3>
             <div className="flex gap-4 items-center">
-              <div className="w-10 h-10 bg-secondary rounded-md flex items-center justify-center">
+              <div className="w-10 h-10 bg-secondary rounded-md flex items-center justify-center border border-border">
                 <LuMail className="size-6 text-foreground" />
               </div>
               <div className="text-left">
@@ -147,16 +149,22 @@ export default function Contact() {
               </div>
             </div>
             <div className="flex gap-4 items-center">
-              <div className="w-10 h-10 bg-secondary rounded-md flex items-center justify-center">
-                <LuPhone className="size-6 text-foreground" />
+              <div className="w-10 h-10 bg-secondary rounded-md flex items-center justify-center border border-border">
+                <FaWhatsapp className="size-6 text-foreground" />
               </div>
               <div className="text-left">
-                <h4 className="text-sm text-muted-foreground">Phone</h4>
-                <p>+201142221039</p>
+                <h4 className="text-sm text-muted-foreground">WhatsApp</h4>
+                <a
+                  href="https://wa.me/+201142221039"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  +201142221039
+                </a>
               </div>
             </div>
             <div className="flex gap-4 items-center">
-              <div className="w-10 h-10 bg-secondary rounded-md flex items-center justify-center">
+              <div className="w-10 h-10 bg-secondary rounded-md flex items-center justify-center border border-border">
                 <LuMapPin className="size-6 text-foreground" />
               </div>
               <div className="text-left">
@@ -169,7 +177,7 @@ export default function Contact() {
             <div className="flex flex-col gap-4">
               <h3 className="text-xl text-left">Connect With Me</h3>
               <div className="flex gap-4 items-center">
-                <div className="w-10 h-10 bg-secondary rounded-md flex items-center justify-center">
+                <div className="w-10 h-10 bg-secondary rounded-md flex items-center justify-center border border-border">
                   <LuGithub className="size-6 text-foreground" />
                 </div>
                 <div className="text-left">
@@ -184,7 +192,7 @@ export default function Contact() {
                 </div>
               </div>
               <div className="flex gap-4 items-center">
-                <div className="w-10 h-10 bg-secondary rounded-md flex items-center justify-center">
+                <div className="w-10 h-10 bg-secondary rounded-md flex items-center justify-center border border-border">
                   <LuLinkedin className="size-6 text-foreground" />
                 </div>
                 <div className="text-left">

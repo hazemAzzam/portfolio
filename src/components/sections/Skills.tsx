@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
+import { GlowingEffect } from "../ui/glowing-effect";
 
 export default function Skills() {
   const skillCategories = [
@@ -128,15 +129,15 @@ export default function Skills() {
                     const getProficiencyColor = (proficiency: string) => {
                       switch (proficiency) {
                         case "Expert":
-                          return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400";
+                          return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 border border-green-400/30";
                         case "Advanced":
-                          return "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400";
+                          return "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-400/30";
                         case "Intermediate":
-                          return "bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400";
+                          return "bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400 border border-orange-400/30";
                         case "Beginner":
-                          return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400";
+                          return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400 border border-gray-400/30";
                         default:
-                          return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400";
+                          return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400 border border-gray-400/30";
                       }
                     };
 
@@ -183,7 +184,7 @@ export default function Skills() {
           className="text-center"
         >
           <h3 className="text-xl mb-6">Technology Stack</h3>
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className=" flex flex-wrap gap-2 justify-center">
             {technologies.map((tech, index) => (
               <motion.div
                 key={tech}
@@ -191,8 +192,19 @@ export default function Skills() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
+                className="relative rounded-md"
               >
-                <Badge variant="secondary" className="text-sm px-3 py-1">
+                <GlowingEffect
+                  spread={40}
+                  glow={true}
+                  disabled={false}
+                  proximity={64}
+                  inactiveZone={0.01}
+                />
+                <Badge
+                  variant="secondary"
+                  className="text-sm px-3 py-1 border border-border"
+                >
                   {tech}
                 </Badge>
               </motion.div>
