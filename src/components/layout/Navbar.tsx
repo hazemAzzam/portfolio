@@ -3,75 +3,75 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
 import { ModeToggle } from "../ui/mode-toggle";
-import useScrollToSection from "@/hooks/useScroll";
+import { MenuIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
-import { MenuIcon } from "lucide-react";
+} from "../ui/dropdown-menu";
 
 const Navbar = () => {
-  const { scrollToSection } = useScrollToSection();
   const navItems = [
-    { label: "Home", href: "#hero" },
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
-    { label: "Projects", href: "#projects" },
-    { label: "Experience", href: "#experience" },
-    { label: "Contact", href: "#contact" },
+    { label: "Home", href: "/#home" },
+    // { label: "About", href: "/#about" },
+    // { label: "Skills", href: "/#skills" },
+    { label: "Projects", href: "/#projects" },
+    // { label: "Experience", href: "/#experience" },
+    // { label: "Contact", href: "/#contact" },
   ];
 
   return (
     <header className="sticky max-w-screen top-0 left-0 right-0 z-50 py-4 bg-background/10 backdrop-blur-md border-b ">
       <div className="container w-full flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Hazem Azzam</h1>
+        <Link href="/">
+          <h1 className="text-2xl font-bold">Hazem Azzam</h1>
+        </Link>
         <div className="flex items-center gap-4">
-          <ModeToggle />
           <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item, index) => (
-              <button
+            {navItems.map((item) => (
+              <Link
                 key={item.label}
-                onClick={() => scrollToSection(item.href)}
+                href={item.href}
+                // onClick={() => scrollToSection(item.href)}
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
           </nav>
           <div className="md:hidden">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon">
-                  <MenuIcon className="w-4 h-4" />
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="hover:scale-105 active:scale-95"
+                >
+                  <MenuIcon className="w-4 h-4 transition-transform duration-200" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="end"
                 side="bottom"
-                className="bg-background border rounded-md"
+                className="w-56 bg-background border rounded-md shadow-lg "
               >
                 {navItems.map((item, index) => (
-                  <DropdownMenuItem
-                    key={item.label}
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-foreground w-[50vw] py-5 hover:bg-secondary"
-                  >
-                    {item.label}
+                  <DropdownMenuItem key={item.label} asChild>
+                    <Link
+                      href={item.href}
+                      // onClick={() => scrollToSection(item.href)}
+                      className="flex w-full text-foreground py-3 px-4 hover:bg-secondary focus:bg-secondary focus:outline-none transition-colors duration-200 ease-in-out"
+                    >
+                      {item.label}
+                    </Link>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
+          <ModeToggle />
         </div>
       </div>
     </header>

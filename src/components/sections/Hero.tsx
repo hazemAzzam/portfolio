@@ -9,7 +9,7 @@ import AnimatedScrollToButton from "../ui/animatedScrollToButton";
 
 export default function Hero() {
   return (
-    <Section id="hero">
+    <Section id="home">
       <AnimatedGroup
         className="flex flex-col items-center justify-between"
         preset="scale"

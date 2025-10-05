@@ -10,13 +10,22 @@ export type TechStackType = {
 };
 
 export type ProjectType = {
-  name: string;
+  id: string;
+  title: string;
   description: string;
-  techStack: TechStackType[];
-  image: string;
-  link: string;
-  github: string;
-  starred: boolean;
+  detailedDescription: string;
+  technologies: string[];
+  startDate: string;
+  endDate: string;
+  images: string[];
+  liveUrl: string;
+  githubUrl: string;
+  featured: boolean;
+  category: string;
+  role: string;
+  teamSize: number;
+  challenges: string[];
+  achievements: string[];
 };
 
 export type ExperienceType = {

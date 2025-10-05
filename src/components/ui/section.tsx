@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { InView } from "./in-view";
 
 interface SectionProps {
-  id: string;
+  id?: string;
   children?: React.ReactNode;
   className?: string;
   containerClassName?: string;
@@ -17,14 +17,8 @@ export function Section({
   containerClassName,
 }: SectionProps) {
   return (
-    <section
-      id={id}
-      className={cn(
-        "min-h-screen flex items-center justify-center relative",
-        className
-      )}
-    >
-      <div className={cn("container py-20", containerClassName)}>
+    <section id={id} className={cn("relative", className)}>
+      <div className={cn("container relative py-20", containerClassName)}>
         {children}
       </div>
     </section>
