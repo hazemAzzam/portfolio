@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { AnimatedThemeToggler } from "../ui/animated-theme-toggler";
+import { ThemeToggle } from "../theme-toggle";
 
 const Navbar = () => {
   const navItems = [
@@ -71,8 +71,7 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          {/* <ModeToggle /> */}
-          <AnimatedThemeToggler className="hover:scale-105 active:scale-95" />
+          <ThemeToggle />
         </div>
       </div>
     </header>
