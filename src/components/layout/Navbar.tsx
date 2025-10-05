@@ -57,7 +57,7 @@ const Navbar = () => {
                 side="bottom"
                 className="w-56 bg-background border rounded-md shadow-lg "
               >
-                {navItems.map((item, index) => (
+                {navItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
                     <Link
                       href={item.href}

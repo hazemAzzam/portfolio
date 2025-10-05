@@ -1,7 +1,6 @@
 // src/components/ui/section.tsx
 import React from "react";
 import { cn } from "@/lib/utils";
-import { InView } from "./in-view";
 
 interface SectionProps {
   id?: string;

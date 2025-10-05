@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function useScrollToSection() {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);

@@ -1,4 +1,6 @@
-export const PROJECTS_DATA: any[] = [
+import { ProjectType } from "@/types";
+
+export const PROJECTS_DATA: ProjectType[] = [
   {
     id: "ecommerce-platform",
     title: "E-Commerce Platform",
@@ -100,6 +102,7 @@ export const PROJECTS_DATA: any[] = [
     startDate: "2023-11-01",
     endDate: "2024-01-15",
     liveUrl: "https://weather-analytics.vercel.app",
+    githubUrl: "https://github.com/hazemAzzam/weather-dashboard",
     featured: true,
     category: "Data Visualization",
     role: "Solo Developer",

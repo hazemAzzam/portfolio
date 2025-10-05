@@ -16,10 +16,10 @@ export type ProjectType = {
   detailedDescription: string;
   technologies: string[];
   startDate: string;
-  endDate: string;
+  endDate?: string;
   images: string[];
-  liveUrl: string;
-  githubUrl: string;
+  liveUrl?: string;
+  githubUrl?: string;
   featured: boolean;
   category: string;
   role: string;

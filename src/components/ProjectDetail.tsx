@@ -9,8 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { ExternalLink, Github, Calendar, ArrowLeft } from "lucide-react";
-import { motion } from "motion/react";
+import { ExternalLink, Github, Calendar } from "lucide-react";
 import {
   Carousel,
   CarouselContent,

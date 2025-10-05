@@ -1,6 +1,5 @@
 import React from "react";
 import { Section } from "../ui/section";
-import DirectionalInView from "../ui/directional-in-view";
 import { ImageWithFallBack } from "../ui/ImageWithFallBack";
 import Highlights from "../ui/Highlights";
 
@@ -35,9 +34,9 @@ export default function About() {
 
             <p className="text-lg leading-relaxed">
               I believe in the power of continuous learning and staying
-              up-to-date with the latest technologies. Whether it's React,
-              TypeScript, or the newest CSS features, I'm always exploring ways
-              to improve my craft and deliver better solutions.
+              up-to-date with the latest technologies. Whether it&apos;s React,
+              TypeScript, or the newest CSS features, I&apos;m always exploring
+              ways to improve my craft and deliver better solutions.
             </p>
           </div>
         </div>

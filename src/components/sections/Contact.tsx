@@ -7,17 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Section } from "../ui/section";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { Input } from "../ui/input";
 import { ControlledInput } from "../ui/controlled/controlled-input";
 import { Button } from "../ui/button";
 import {
   LuGithub,
   LuLinkedin,
-  LuLocate,
   LuMail,
   LuMapPin,
   LuPhone,
-  LuPin,
 } from "react-icons/lu";
 import { ControlledTextarea } from "../ui/controlled/controlled-textarea";
 
@@ -56,8 +53,8 @@ export default function Contact() {
       >
         <h2 className="text-3xl md:text-4xl mb-4">Get In Touch</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          I'm always open to discussing new opportunities, interesting projects,
-          or just having a chat about frontend development.
+          I&apos;m always open to discussing new opportunities, interesting
+          projects, or just having a chat about frontend development.
         </p>
       </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full h-full">
