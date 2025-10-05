@@ -91,8 +91,8 @@ export default function Projects() {
             </p>
           </div>
           <div className="space-y-8 mb-20">
-            {PROJECTS_DATA.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+            {PROJECTS_DATA.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>
         </div>

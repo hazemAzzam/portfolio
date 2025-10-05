@@ -16,8 +16,11 @@ export default function Hero() {
       >
         <div>
           <Avatar className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/20">
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage
+              src="https://github.com/shadcn.png"
+              alt="Hazem Azzam - Frontend Developer"
+            />
+            <AvatarFallback>HA</AvatarFallback>
           </Avatar>
           <h1
             className={cn(

@@ -10,7 +10,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 
-export default function ProjectCard({ project }: { project: ProjectType }) {
+export default function ProjectCard({
+  project,
+  index = 0,
+}: {
+  project: ProjectType;
+  index?: number;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -23,9 +29,11 @@ export default function ProjectCard({ project }: { project: ProjectType }) {
       <div className="md:col-span-2">
         <ImageWithFallBack
           src={project.images[0]}
-          alt={project.title}
+          alt={`${project.title} - Project Screenshot`}
           fill
           className="w-full h-64 md:h-full object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority={index < 2}
         />
       </div>
       <div className="flex flex-col justify-between gap-4 md:col-span-3 text-start p-4">

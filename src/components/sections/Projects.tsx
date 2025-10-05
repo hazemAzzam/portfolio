@@ -31,7 +31,7 @@ export default function Projects() {
         {/* Featured Projects */}
         <div className="space-y-16 mb-20">
           {featuredProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
         <div className="flex justify-center">
