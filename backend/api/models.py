@@ -3,15 +3,15 @@ from django.db import models
 
 # Create your models here.
 class PersonalInfo(models.Model):
-    name = models.CharField(max_length=100)
-    proffessional_title = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    phone = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    bio = models.TextField()
-    image = models.URLField(max_length=200)
-    linkedin = models.URLField(max_length=100)
-    github = models.URLField(max_length=100)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    proffessionalTitle = models.CharField(max_length=100, null=True, blank=True)
+    email = models.EmailField(max_length=100, null=True, blank=True)
+    phone = models.CharField(max_length=100, null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+    image = models.URLField(max_length=200, null=True, blank=True)
+    linkedin = models.URLField(max_length=100, null=True, blank=True)
+    github = models.URLField(max_length=100, null=True, blank=True)
     
 class Skill(models.Model):
     name = models.CharField(max_length=100)
