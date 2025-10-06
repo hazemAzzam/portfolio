@@ -10,7 +10,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 h-screen bg-sidebar">
+    <aside className="sticky top-0 left-0 w-64 h-screen bg-sidebar">
       <div className="flex flex-col">
         <div className="border-b border-border p-4">
           <h1 className="text-xl font-bold">Dashboard</h1>
