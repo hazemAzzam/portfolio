@@ -41,13 +41,11 @@ import { Button } from "@/components/ui/button";
 import { CirclePlus, X } from "lucide-react";
 import { Empty, EmptyTitle } from "@/components/ui/empty";
 import { DatePicker } from "@/components/ui/date-picker";
-import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch";
 import {
   useCreateProject,
   useUpdateProject,
 } from "@/app/(dashboard)/projects/_hooks/use-projects";
-import { formatDjangoErrors } from "@/lib/error-handler";
 import { ProjectType } from "../_types/project-types";
 
 const schema = z.object({
@@ -185,28 +183,8 @@ export default function ProjectDialog({
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <DialogHeader>
                 <DialogTitle>New Project</DialogTitle>
-                <DialogDescription className="space-y-1 flex flex-col">
-                  {/* Form validation errors */}
-                  {Object.entries(form.formState.errors).map(
-                    ([field, error]) => (
-                      <span key={field} className="text-red-500 text-sm">
-                        {field}: {error?.message}
-                      </span>
-                    )
-                  )}
-
-                  {/* API errors */}
-                  {createProjectMutation.error && (
-                    <div className="text-red-500 text-sm space-y-1">
-                      {Object.entries(
-                        formatDjangoErrors(createProjectMutation.error)
-                      ).map(([field, error]) => (
-                        <div key={field}>
-                          <strong>{field}:</strong> {error}
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                <DialogDescription>
+                  Create a new project to showcase your work.
                 </DialogDescription>
               </DialogHeader>
               <Row>

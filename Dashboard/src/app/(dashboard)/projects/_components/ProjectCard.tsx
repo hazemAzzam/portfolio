@@ -15,7 +15,6 @@ import {
 import React from "react";
 import { Briefcase, Edit, ExternalLink, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Toggle } from "@/components/ui/toggle";
 import { LuGithub } from "react-icons/lu";
 import { ProjectType } from "../_types/project-types";
 import ProjectDialog from "./ProjectDialog";

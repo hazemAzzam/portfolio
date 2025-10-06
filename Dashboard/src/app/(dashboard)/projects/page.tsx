@@ -5,6 +5,7 @@ import React from "react";
 import ProjectDialog from "./_components/ProjectDialog";
 import { useProjects } from "@/app/(dashboard)/projects/_hooks/use-projects";
 import ProjectCard from "./_components/ProjectCard";
+import ProjectsEmptyState from "./_components/ProjectsEmptyState";
 
 export default function Projects() {
   const projects = useProjects();
@@ -24,9 +25,13 @@ export default function Projects() {
           </ProjectDialog>
         </div>
         <div className="flex flex-col gap-4">
-          {projects.data?.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+          {projects.data?.length === 0 ? (
+            <ProjectsEmptyState />
+          ) : (
+            projects.data?.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))
+          )}
         </div>
       </div>
     </div>

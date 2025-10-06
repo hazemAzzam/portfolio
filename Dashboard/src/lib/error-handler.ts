@@ -2,7 +2,7 @@ import { toast } from "sonner";
 
 export interface ApiError {
   response?: {
-    data?: any;
+    data?: unknown;
     status?: number;
   };
   message?: string;

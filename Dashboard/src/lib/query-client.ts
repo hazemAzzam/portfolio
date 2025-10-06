@@ -6,16 +6,23 @@ export const queryClient = new QueryClient({
     queries: {
       staleTime: 5 * 60 * 1000, // 5 minutes
       gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
-      retry: (failureCount, error: any) => {
+      retry: (failureCount, error: unknown) => {
         // Don't retry on 4xx errors except 408, 429
-        if (error?.response?.status >= 400 && error?.response?.status < 500) {
+        if (error && typeof error === "object" && "response" in error) {
+          const apiError = error as { response?: { status?: number } };
           if (
-            error?.response?.status === 408 ||
-            error?.response?.status === 429
+            apiError.response?.status &&
+            apiError.response.status >= 400 &&
+            apiError.response.status < 500
           ) {
-            return failureCount < 2;
+            if (
+              apiError.response.status === 408 ||
+              apiError.response.status === 429
+            ) {
+              return failureCount < 2;
+            }
+            return false;
           }
-          return false;
         }
         // Retry up to 3 times for other errors
         return failureCount < 3;

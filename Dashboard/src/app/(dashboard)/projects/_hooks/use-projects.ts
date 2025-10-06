@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api";
-import { handleApiError } from "@/lib/error-handler";
+import { handleApiError, ApiError } from "@/lib/error-handler";
 import { toast } from "sonner";
 import { CreateProjectType, ProjectType } from "../_types/project-types";
 
@@ -60,13 +60,13 @@ export const useCreateProject = () => {
   return useMutation({
     mutationFn: ({ data }: { data: CreateProjectType }) =>
       projectsApi.create(data),
-    onSuccess: (newProject) => {
+    onSuccess: () => {
       // Invalidate and refetch projects list
       queryClient.invalidateQueries({ queryKey: ["projects"] });
       toast.success("Project created successfully");
     },
-    onError: (error: any) => {
-      handleApiError(error, "Failed to create project");
+    onError: (error: unknown) => {
+      handleApiError(error as ApiError, "Failed to create project");
     },
   });
 };
@@ -85,8 +85,8 @@ export const useUpdateProject = () => {
       });
       toast.success("Project updated successfully");
     },
-    onError: (error: any) => {
-      handleApiError(error, "Failed to update project");
+    onError: (error: unknown) => {
+      handleApiError(error as ApiError, "Failed to update project");
     },
   });
 };
@@ -101,8 +101,8 @@ export const useDeleteProject = () => {
       queryClient.invalidateQueries({ queryKey: ["projects"] });
       toast.success("Project deleted successfully");
     },
-    onError: (error: any) => {
-      handleApiError(error, "Failed to delete project");
+    onError: (error: unknown) => {
+      handleApiError(error as ApiError, "Failed to delete project");
     },
   });
 };
@@ -120,8 +120,8 @@ export const useToggleFeaturedProject = () => {
       });
       toast.success("Project featured successfully");
     },
-    onError: (error: any) => {
-      handleApiError(error, "Failed to toggle featured project");
+    onError: (error: unknown) => {
+      handleApiError(error as ApiError, "Failed to toggle featured project");
     },
   });
 };
