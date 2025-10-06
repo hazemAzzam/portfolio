@@ -1,6 +1,6 @@
 // Environment configuration
 export const config = {
-  apiUrl: "http://127.0.0.1:8000/api",
+  apiUrl: "https://backend-seven-jet.vercel.app/api",
 } as const;
 
 // You can add this to your .env.local file:
