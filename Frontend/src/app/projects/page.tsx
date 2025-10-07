@@ -8,29 +8,42 @@ import { FaWhatsapp } from "react-icons/fa";
 import { Badge } from "@/components/ui/badge";
 import { PROJECTS_DATA } from "@/lib/data";
 import ProjectCard from "./components/ProjectCard";
+import { apiClient } from "@/lib/api-client";
+import { AxiosResponse } from "axios";
+import { PersonalInfoType, ProjectType, SkillType } from "@/types";
 
-export default function Projects() {
+export default async function Projects() {
+  const projectsRes = (await apiClient.get("/projects")) as AxiosResponse<
+    ProjectType[]
+  >;
+  const personalInfoRes = (await apiClient.get(
+    "/personal-info"
+  )) as AxiosResponse<PersonalInfoType>;
+
+  const projects: ProjectType[] = projectsRes.data;
+  const personalInfo: PersonalInfoType = personalInfoRes.data;
+
   return (
     <Section id="projects" className="bg-muted/30">
       <div className="grid lg:grid-cols-4 gap-8 w-full">
         <div className={cn("lg:col-span-1", " space-y-6 self-start")}>
           <Card>
             <Avatar className="w-32 h-32 mx-auto rounded-full overflow-hidden">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src={personalInfo.image} />
+              <AvatarFallback>{personalInfo.name?.charAt(0)}</AvatarFallback>
             </Avatar>
             <div className="text-center">
-              <h1 className="text-2xl font-bold">Hazem Azzam</h1>
-              <p className="text-muted-foreground">Frontend Developer</p>
+              <h1 className="text-2xl font-bold">{personalInfo.name}</h1>
+              <p className="text-muted-foreground">
+                {personalInfo.proffessionalTitle}
+              </p>
             </div>
           </Card>
           <Card className="text-start">
             <CardHeader>About</CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Passionate frontend developer with 5+ years of experience
-                creating modern, responsive web applications. I specialize in
-                React, TypeScript, and modern CSS frameworks.
+                {personalInfo.bio}
               </p>
             </CardContent>
           </Card>
@@ -39,44 +52,32 @@ export default function Projects() {
             <CardContent className="space-y-2">
               <p className="flex items-center text-sm  leading-relaxed">
                 <LuMail className="size-4 mr-2 text-muted-foreground" />
-                <a href="mailto:hazemmohamed9194@gmail.com">hazemmohamed9194</a>
+                <a href={`mailto:${personalInfo.email}`}>
+                  {personalInfo.email?.split("@")[0]}
+                </a>
               </p>
               <p className="flex items-center text-sm  leading-relaxed">
                 <FaWhatsapp className="size-4 mr-2 text-muted-foreground" />
-                <a href="https://wa.me/+201142221039">+201142221039</a>
+                <a href={`https://wa.me/${personalInfo.phone}`}>
+                  {personalInfo.phone}
+                </a>
               </p>
               <p className="flex items-center text-sm  leading-relaxed">
                 <LuGithub className="size-4 mr-2 text-muted-foreground" />
-                <a href="https://github.com/hazemAzzam">hazemAzzam</a>
+                <a href={`${personalInfo.github}`}>{personalInfo.github}</a>
               </p>
               <p className="flex items-center text-sm  leading-relaxed">
                 <LuLinkedin className="size-4 mr-2 text-muted-foreground" />
-                <a href="https://www.linkedin.com/in/hazemAzzam/">hazemAzzam</a>
+                <a href={`${personalInfo.linkedin}`}>{personalInfo.linkedin}</a>
               </p>
             </CardContent>
           </Card>
           <Card className="text-start">
             <CardHeader>Skills</CardHeader>
             <CardContent className="flex flex-wrap gap-1">
-              {[
-                "React.js",
-                "Next.js",
-                "TypeScript",
-                "JavaScript",
-                "HTML",
-                "CSS",
-                "Tailwind",
-                "MySQL",
-                "Git",
-                "PostgreSQL",
-                "GitHub",
-                "Figma",
-                "React Query",
-                "Zustand",
-                "REST APIs",
-              ].map((skill) => (
-                <Badge variant="secondary" key={skill}>
-                  {skill}
+              {personalInfo?.skills?.map((skill: SkillType) => (
+                <Badge variant="secondary" key={skill.name}>
+                  {skill.name}
                 </Badge>
               ))}
             </CardContent>
@@ -91,7 +92,7 @@ export default function Projects() {
             </p>
           </div>
           <div className="space-y-8 mb-20">
-            {PROJECTS_DATA.map((project, index) => (
+            {projects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>
@@ -99,4 +100,11 @@ export default function Projects() {
       </div>
     </Section>
   );
+}
+
+export async function generateStaticParams() {
+  const projectsRes = await apiClient.get("/projects");
+  return {
+    projects: projectsRes.data,
+  };
 }

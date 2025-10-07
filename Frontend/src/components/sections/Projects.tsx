@@ -4,12 +4,12 @@ import { motion } from "motion/react";
 import { Button } from "../ui/button";
 import { Section } from "../ui/section";
 import { LuArrowRight } from "react-icons/lu";
-import { PROJECTS_DATA } from "@/lib/data";
 import Link from "next/link";
 import ProjectCard from "@/app/projects/components/ProjectCard";
+import { ProjectType } from "@/types";
 
-export default function Projects() {
-  const featuredProjects = PROJECTS_DATA.filter((project) => project.featured);
+export default function Projects({ projects }: { projects: ProjectType[] }) {
+  const featuredProjects = projects.filter((project) => project.featured);
 
   return (
     <Section id="projects" className="bg-muted/30">

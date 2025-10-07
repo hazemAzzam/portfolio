@@ -18,28 +18,11 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import { ImageWithFallBack } from "./ui/ImageWithFallBack";
-
-export interface ProjectData {
-  id: string;
-  title: string;
-  description: string;
-  detailedDescription: string;
-  images: string[];
-  technologies: string[];
-  startDate: string;
-  endDate?: string; // Optional for ongoing projects
-  liveUrl?: string; // Optional
-  githubUrl?: string; // Optional
-  featured: boolean;
-  category: string;
-  role: string;
-  teamSize?: number;
-  challenges?: string[];
-  achievements?: string[];
-}
+import { ProjectType } from "@/types";
+import { Lens } from "./ui/lens";
 
 interface ProjectDetailProps {
-  project: ProjectData;
+  project: ProjectType;
   children: React.ReactNode;
 }
 
@@ -71,7 +54,7 @@ export function ProjectDetail({ project, children }: ProjectDetailProps) {
           <div className="relative">
             <Carousel className="w-full">
               <CarouselContent>
-                {project.images.map((image, index) => (
+                {project.images_list.map((image, index) => (
                   <CarouselItem key={index}>
                     <div className="relative">
                       <ImageWithFallBack
@@ -83,7 +66,7 @@ export function ProjectDetail({ project, children }: ProjectDetailProps) {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              {project.images.length > 1 && (
+              {project.images_list.length > 1 && (
                 <>
                   <CarouselPrevious className="left-4" />
                   <CarouselNext className="right-4" />
@@ -102,27 +85,29 @@ export function ProjectDetail({ project, children }: ProjectDetailProps) {
                 </p>
               </div>
 
-              {project.challenges && project.challenges.length > 0 && (
-                <div>
-                  <h3 className="text-lg mb-2">Key Challenges</h3>
-                  <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                    {project.challenges.map((challenge, index) => (
-                      <li key={index}>{challenge}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              {project.challenges_list &&
+                project.challenges_list.length > 0 && (
+                  <div>
+                    <h3 className="text-lg mb-2">Key Challenges</h3>
+                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                      {project.challenges_list.map((challenge, index) => (
+                        <li key={index}>{challenge}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-              {project.achievements && project.achievements.length > 0 && (
-                <div>
-                  <h3 className="text-lg mb-2">Key Achievements</h3>
-                  <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                    {project.achievements.map((achievement, index) => (
-                      <li key={index}>{achievement}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              {project.achievements_list &&
+                project.achievements_list.length > 0 && (
+                  <div>
+                    <h3 className="text-lg mb-2">Key Achievements</h3>
+                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                      {project.achievements_list.map((achievement, index) => (
+                        <li key={index}>{achievement}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
             </div>
 
             <div className="space-y-4">
@@ -162,7 +147,7 @@ export function ProjectDetail({ project, children }: ProjectDetailProps) {
               <div>
                 <h4 className="text-sm mb-2">Technologies Used</h4>
                 <div className="flex flex-wrap gap-1">
-                  {project.technologies.map((tech) => (
+                  {project?.technologies?.map((tech: string) => (
                     <Badge key={tech} variant="secondary" className="text-xs">
                       {tech}
                     </Badge>

@@ -1,8 +1,22 @@
 import { z } from "zod";
 
+export type PersonalInfoType = {
+  name?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  proffessionalTitle?: string;
+  bio?: string;
+  image?: string;
+  linkedin?: string;
+  github?: string;
+  skills?: SkillType[];
+};
+
 export type SkillType = {
-  name: string;
-  progress: number;
+  name?: string;
+  proficiency?: number;
+  category?: string;
 };
 
 export type TechStackType = {
@@ -12,20 +26,21 @@ export type TechStackType = {
 export type ProjectType = {
   id: string;
   title: string;
+  overview: string;
   description: string;
   detailedDescription: string;
-  technologies: string[];
+  technologies?: string[];
   startDate: string;
   endDate?: string;
-  images: string[];
+  images_list: string[];
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
   category: string;
   role: string;
   teamSize: number;
-  challenges: string[];
-  achievements: string[];
+  challenges_list: string[];
+  achievements_list: string[];
 };
 
 export type ExperienceType = {

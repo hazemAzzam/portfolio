@@ -28,7 +28,7 @@ export default function ProjectCard({
     >
       <div className="md:col-span-2">
         <ImageWithFallBack
-          src={project.images[0]}
+          src={project?.images_list[0]}
           alt={`${project.title} - Project Screenshot`}
           fill
           className="w-full h-64 md:h-full object-cover"
@@ -43,9 +43,11 @@ export default function ProjectCard({
           {project.category}
         </p>
         <h3 className="text-xl font-bold">{project.title}</h3>
-        <p className="text-muted-foreground">{project.description}</p>
+        <p className="text-muted-foreground max-h-[100px] overflow-y-auto">
+          {project.overview}
+        </p>
         <div className="flex flex-wrap gap-2">
-          {project.technologies.map((technology: string) => (
+          {project?.technologies?.map((technology: string) => (
             <Badge key={technology} variant="outline">
               {technology}
             </Badge>
