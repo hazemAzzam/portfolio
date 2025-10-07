@@ -9,8 +9,8 @@ class PersonalInfo(models.Model):
     address = models.CharField(max_length=100, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     image = models.URLField(max_length=200, null=True, blank=True)
-    linkedin = models.URLField(max_length=100, null=True, blank=True)
-    github = models.URLField(max_length=100, null=True, blank=True)
+    linkedin = models.CharField(max_length=100, null=True, blank=True)
+    github = models.CharField(max_length=100, null=True, blank=True)
     
 class Skill(models.Model):
     name = models.CharField(max_length=100)
@@ -22,6 +22,7 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     description = models.TextField()
+    category = models.CharField(max_length=100, default='')
     overview = models.TextField()
     role = models.CharField(max_length=100)
     teamSize = models.IntegerField()
