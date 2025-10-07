@@ -34,12 +34,12 @@ class ProjectImageSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(serializers.ModelSerializer):
     achievements = serializers.ListField(
-        child=serializers.CharField(max_length=100),
+        child=serializers.CharField(),
         write_only=True,
         required=False
     )
     challenges = serializers.ListField(
-        child=serializers.CharField(max_length=100),
+        child=serializers.CharField(),
         write_only=True,
         required=False
     )

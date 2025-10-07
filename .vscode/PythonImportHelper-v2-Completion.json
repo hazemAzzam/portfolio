@@ -25,22 +25,6 @@
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -73,11 +57,60 @@
         "documentation": {}
     },
     {
-        "label": "title",
-        "importPath": "turtle",
-        "description": "turtle",
+        "label": "BaseAuthentication",
+        "importPath": "rest_framework.authentication",
+        "description": "rest_framework.authentication",
         "isExtraImport": true,
-        "detail": "turtle",
+        "detail": "rest_framework.authentication",
+        "documentation": {}
+    },
+    {
+        "label": "SessionAuthentication",
+        "importPath": "rest_framework.authentication",
+        "description": "rest_framework.authentication",
+        "isExtraImport": true,
+        "detail": "rest_framework.authentication",
+        "documentation": {}
+    },
+    {
+        "label": "AuthenticationFailed",
+        "importPath": "rest_framework.exceptions",
+        "description": "rest_framework.exceptions",
+        "isExtraImport": true,
+        "detail": "rest_framework.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
         "documentation": {}
     },
     {
@@ -177,20 +210,19 @@
         "documentation": {}
     },
     {
+        "label": "APIView",
+        "importPath": "rest_framework.views",
+        "description": "rest_framework.views",
+        "isExtraImport": true,
+        "detail": "rest_framework.views",
+        "documentation": {}
+    },
+    {
         "label": "IsAuthenticatedOrReadOnly",
         "importPath": "rest_framework.permissions",
         "description": "rest_framework.permissions",
         "isExtraImport": true,
         "detail": "rest_framework.permissions",
-        "documentation": {}
-    },
-    {
-        "label": "os",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
         "documentation": {}
     },
     {
@@ -210,20 +242,38 @@
         "documentation": {}
     },
     {
-        "label": "get_wsgi_application",
-        "importPath": "django.core.wsgi",
-        "description": "django.core.wsgi",
-        "isExtraImport": true,
-        "detail": "django.core.wsgi",
-        "documentation": {}
-    },
-    {
         "label": "sys",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "sys",
         "description": "sys",
         "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "django",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django",
+        "description": "django",
+        "detail": "django",
+        "documentation": {}
+    },
+    {
+        "label": "execute_from_command_line",
+        "importPath": "django.core.management",
+        "description": "django.core.management",
+        "isExtraImport": true,
+        "detail": "django.core.management",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
         "documentation": {}
     },
     {
@@ -245,15 +295,6 @@
         "documentation": {}
     },
     {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "backend.api.migrations.0002_remove_project_link_project_githuburl_and_more",
-        "description": "backend.api.migrations.0002_remove_project_link_project_githuburl_and_more",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"api\", \"0001_initial\"),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name=\"project\",\n            name=\"link\",\n        ),\n        migrations.AddField(",
-        "detail": "backend.api.migrations.0002_remove_project_link_project_githuburl_and_more",
-        "documentation": {}
-    },
-    {
         "label": "ApiConfig",
         "kind": 6,
         "importPath": "backend.api.apps",
@@ -263,11 +304,29 @@
         "documentation": {}
     },
     {
+        "label": "APIKeyAuthentication",
+        "kind": 6,
+        "importPath": "backend.api.authentication",
+        "description": "backend.api.authentication",
+        "peekOfCode": "class APIKeyAuthentication(BaseAuthentication):\n    \"\"\"\n    Custom API Key authentication for Vercel deployment.\n    \"\"\"\n    def authenticate(self, request):\n        api_key = request.META.get('HTTP_X_API_KEY')\n        if not api_key:\n            return None\n        # Get the expected API key from environment variables\n        expected_api_key = os.getenv('API_KEY')",
+        "detail": "backend.api.authentication",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "backend.api.index",
+        "description": "backend.api.index",
+        "peekOfCode": "app = get_wsgi_application()",
+        "detail": "backend.api.index",
+        "documentation": {}
+    },
+    {
         "label": "PersonalInfo",
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class PersonalInfo(models.Model):\n    name = models.CharField(max_length=100)\n    proffessional_title = models.CharField(max_length=100)\n    email = models.EmailField(max_length=100)\n    phone = models.CharField(max_length=100)\n    address = models.CharField(max_length=100)\n    bio = models.TextField()\n    image = models.URLField(max_length=200)\n    linkedin = models.URLField(max_length=100)\n    github = models.URLField(max_length=100)",
+        "peekOfCode": "class PersonalInfo(models.Model):\n    name = models.CharField(max_length=100, null=True, blank=True)\n    proffessionalTitle = models.CharField(max_length=100, null=True, blank=True)\n    email = models.EmailField(max_length=100, null=True, blank=True)\n    phone = models.CharField(max_length=100, null=True, blank=True)\n    address = models.CharField(max_length=100, null=True, blank=True)\n    bio = models.TextField(null=True, blank=True)\n    image = models.URLField(max_length=200, null=True, blank=True)\n    linkedin = models.URLField(max_length=100, null=True, blank=True)\n    github = models.URLField(max_length=100, null=True, blank=True)",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -294,7 +353,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class ProjectAchievement(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    achievement = models.CharField(max_length=100)\nclass ProjectChallenge(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    challenge = models.CharField(max_length=100)\nclass ProjectImage(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    image = models.URLField(max_length=200)",
+        "peekOfCode": "class ProjectAchievement(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    achievement = models.TextField()\nclass ProjectChallenge(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    challenge = models.TextField()\nclass ProjectImage(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    image = models.URLField(max_length=200)",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -303,7 +362,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class ProjectChallenge(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    challenge = models.CharField(max_length=100)\nclass ProjectImage(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    image = models.URLField(max_length=200)",
+        "peekOfCode": "class ProjectChallenge(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    challenge = models.TextField()\nclass ProjectImage(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    image = models.URLField(max_length=200)",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -357,7 +416,7 @@
         "kind": 6,
         "importPath": "backend.api.serializers",
         "description": "backend.api.serializers",
-        "peekOfCode": "class ProjectImageSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectImage\n        fields = '__all__'\nclass ProjectSerializer(serializers.ModelSerializer):\n    achievements = serializers.ListField(\n        child=serializers.CharField(max_length=100),\n        write_only=True,\n        required=False\n    )",
+        "peekOfCode": "class ProjectImageSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectImage\n        fields = '__all__'\nclass ProjectSerializer(serializers.ModelSerializer):\n    achievements = serializers.ListField(\n        child=serializers.CharField(),\n        write_only=True,\n        required=False\n    )",
         "detail": "backend.api.serializers",
         "documentation": {}
     },
@@ -366,7 +425,7 @@
         "kind": 6,
         "importPath": "backend.api.serializers",
         "description": "backend.api.serializers",
-        "peekOfCode": "class ProjectSerializer(serializers.ModelSerializer):\n    achievements = serializers.ListField(\n        child=serializers.CharField(max_length=100),\n        write_only=True,\n        required=False\n    )\n    challenges = serializers.ListField(\n        child=serializers.CharField(max_length=100),\n        write_only=True,\n        required=False",
+        "peekOfCode": "class ProjectSerializer(serializers.ModelSerializer):\n    achievements = serializers.ListField(\n        child=serializers.CharField(),\n        write_only=True,\n        required=False\n    )\n    challenges = serializers.ListField(\n        child=serializers.CharField(),\n        write_only=True,\n        required=False",
         "detail": "backend.api.serializers",
         "documentation": {}
     },
@@ -375,7 +434,7 @@
         "kind": 5,
         "importPath": "backend.api.urls",
         "description": "backend.api.urls",
-        "peekOfCode": "router = DefaultRouter()\nrouter.register(r'personal-info', PersonalInfoViewSet)\nrouter.register(r'skills', SkillViewSet)\nrouter.register(r'projects', ProjectViewSet)\nurlpatterns = [\n    path('', include(router.urls)),\n]",
+        "peekOfCode": "router = DefaultRouter()\nrouter.register(r'skills', SkillViewSet)\nrouter.register(r'projects', ProjectViewSet)\nurlpatterns = [\n    path('', include(router.urls)),\n    path('personal-info/', PersonalInfoView.as_view(), name='personal-info'),\n]",
         "detail": "backend.api.urls",
         "documentation": {}
     },
@@ -384,16 +443,16 @@
         "kind": 5,
         "importPath": "backend.api.urls",
         "description": "backend.api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', include(router.urls)),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('', include(router.urls)),\n    path('personal-info/', PersonalInfoView.as_view(), name='personal-info'),\n]",
         "detail": "backend.api.urls",
         "documentation": {}
     },
     {
-        "label": "PersonalInfoViewSet",
+        "label": "PersonalInfoView",
         "kind": 6,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "class PersonalInfoViewSet(viewsets.ModelViewSet):\n    queryset = PersonalInfo.objects.all()\n    serializer_class = PersonalInfoSerializer\n    # permission_classes = [IsAuthenticatedOrReadOnly]\nclass SkillViewSet(viewsets.ModelViewSet):\n    queryset = Skill.objects.all()\n    serializer_class = SkillSerializer\n    # permission_classes = [IsAuthenticatedOrReadOnly]\nclass ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()",
+        "peekOfCode": "class PersonalInfoView(APIView):\n    \"\"\"\n    API view for PersonalInfo - GET and UPDATE operations only.\n    Since there will always be only one PersonalInfo object.\n    \"\"\"\n    authentication_classes = [APIKeyAuthentication, SessionAuthentication]\n    permission_classes = []\n    def get(self, request):\n        \"\"\"\n        Get the single PersonalInfo object. Return empty object if none exists.",
         "detail": "backend.api.views",
         "documentation": {}
     },
@@ -402,7 +461,7 @@
         "kind": 6,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "class SkillViewSet(viewsets.ModelViewSet):\n    queryset = Skill.objects.all()\n    serializer_class = SkillSerializer\n    # permission_classes = [IsAuthenticatedOrReadOnly]\nclass ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    # permission_classes = [IsAuthenticatedOrReadOnly]\n    @action(detail=True, url_path='toggle-featured', methods=['post'])\n    def toggle_featured(self, request, pk=None):",
+        "peekOfCode": "class SkillViewSet(viewsets.ModelViewSet):\n    queryset = Skill.objects.all()\n    serializer_class = SkillSerializer\n    authentication_classes = [APIKeyAuthentication, SessionAuthentication]\n    permission_classes = []\nclass ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    authentication_classes = [APIKeyAuthentication, SessionAuthentication]\n    permission_classes = []",
         "detail": "backend.api.views",
         "documentation": {}
     },
@@ -411,7 +470,7 @@
         "kind": 6,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "class ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    # permission_classes = [IsAuthenticatedOrReadOnly]\n    @action(detail=True, url_path='toggle-featured', methods=['post'])\n    def toggle_featured(self, request, pk=None):\n        \"\"\"\n        Toggle the featured status of a project.\n        \"\"\"\n        project = self.get_object()",
+        "peekOfCode": "class ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    authentication_classes = [APIKeyAuthentication, SessionAuthentication]\n    permission_classes = []\n    @action(detail=True, url_path='toggle-featured', methods=['post'])\n    def toggle_featured(self, request, pk=None):\n        \"\"\"\n        Toggle the featured status of a project.\n        \"\"\"",
         "detail": "backend.api.views",
         "documentation": {}
     },
@@ -429,7 +488,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = \"django-insecure-nhnsrf07bxr#*9+((bqoj)0te=ge%1b2n(z*g=ro+%2#j-4x29\"\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nALLOWED_HOSTS = ['.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -438,7 +497,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "SECRET_KEY = \"django-insecure-nhnsrf07bxr#*9+((bqoj)0te=ge%1b2n(z*g=ro+%2#j-4x29\"\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",",
+        "peekOfCode": "SECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nALLOWED_HOSTS = ['.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -447,7 +506,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",",
+        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = ['.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -456,7 +515,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    \"rest_framework\",",
+        "peekOfCode": "ALLOWED_HOSTS = ['.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    \"rest_framework\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -501,7 +560,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "WSGI_APPLICATION = \"backend.wsgi.application\"\n# Database\n# https://docs.djangoproject.com/en/5.1/ref/settings/#databases\nDATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": BASE_DIR / \"db.sqlite3\",\n    }\n}\n# Password validation",
+        "peekOfCode": "WSGI_APPLICATION = \"backend.wsgi.application\"\n# Database\n# https://docs.djangoproject.com/en/5.1/ref/settings/#databases\n# Database configuration - Supabase PostgreSQL\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql_psycopg2',\n        'NAME': os.environ.get('POSTGRES_DATABASE', 'postgres'),\n        'USER': os.environ.get('POSTGRES_USER', 'postgres'),\n        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -510,7 +569,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "DATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": BASE_DIR / \"db.sqlite3\",\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql_psycopg2',\n        'NAME': os.environ.get('POSTGRES_DATABASE', 'postgres'),\n        'USER': os.environ.get('POSTGRES_USER', 'postgres'),\n        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),\n        'HOST': os.environ.get('POSTGRES_HOST'),\n        'PORT': os.environ.get('POSTGRES_PORT'),\n        'OPTIONS': {\n            'sslmode': 'require',",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -618,7 +677,16 @@
         "kind": 5,
         "importPath": "backend.backend.wsgi",
         "description": "backend.backend.wsgi",
-        "peekOfCode": "application = get_wsgi_application()",
+        "peekOfCode": "application = get_wsgi_application()\napp = application",
+        "detail": "backend.backend.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "backend.backend.wsgi",
+        "description": "backend.backend.wsgi",
+        "peekOfCode": "app = application",
         "detail": "backend.backend.wsgi",
         "documentation": {}
     },
@@ -629,6 +697,15 @@
         "description": "backend.manage",
         "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault(\"DJANGO_SETTINGS_MODULE\", \"backend.settings\")\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
         "detail": "backend.manage",
+        "documentation": {}
+    },
+    {
+        "label": "delete_files",
+        "kind": 2,
+        "importPath": "backend.rm_cache",
+        "description": "backend.rm_cache",
+        "peekOfCode": "def delete_files(base_dir):\n    # Regular expression to match filenames that start with four digits\n    digit_pattern = re.compile(r'^\\d{4}')\n    # Delete sqllite3\n    db_path = os.path.join(base_dir, 'db.sqlite3')\n    if os.path.exists(db_path):\n        os.remove(db_path)\n    else:\n        print(f\"db.sqlite3 not found in {base_dir}\")\n    for root, dirs, files in os.walk(base_dir):",
+        "detail": "backend.rm_cache",
         "documentation": {}
     },
     {
