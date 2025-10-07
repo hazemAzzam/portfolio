@@ -4,10 +4,10 @@ import z from "zod";
 export const personalInfoSchema = z.object({
   name: z.string().optional(),
   proffessionalTitle: z.string().optional(),
-  email: z.string().email().optional(),
+  email: z.email().optional(),
   phone: z.string().optional(),
   address: z.string().optional(),
   bio: z.string().optional(),
-  linkedin: z.string().url().optional(),
-  github: z.string().url().optional(),
+  linkedin: z.string().optional(),
+  github: z.string().optional(),
 });
