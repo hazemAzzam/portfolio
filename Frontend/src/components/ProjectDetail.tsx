@@ -19,7 +19,6 @@ import {
 } from "./ui/carousel";
 import { ImageWithFallBack } from "./ui/ImageWithFallBack";
 import { ProjectType } from "@/types";
-import { Lens } from "./ui/lens";
 
 interface ProjectDetailProps {
   project: ProjectType;

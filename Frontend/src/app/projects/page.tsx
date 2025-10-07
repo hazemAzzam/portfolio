@@ -6,7 +6,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LuMail, LuGithub, LuLinkedin } from "react-icons/lu";
 import { FaWhatsapp } from "react-icons/fa";
 import { Badge } from "@/components/ui/badge";
-import { PROJECTS_DATA } from "@/lib/data";
 import ProjectCard from "./components/ProjectCard";
 import { apiClient } from "@/lib/api-client";
 import { AxiosResponse } from "axios";
@@ -104,7 +103,7 @@ export default async function Projects() {
 
 export async function generateStaticParams() {
   const projectsRes = await apiClient.get("/projects");
-  return {
-    projects: projectsRes.data,
-  };
+  return projectsRes.data.map((project: ProjectType) => ({
+    id: project.id.toString(),
+  }));
 }
