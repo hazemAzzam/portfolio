@@ -230,16 +230,12 @@ export default function ProjectDialog({
                 />
                 <FormField
                   control={form.control}
-                  name="featured"
+                  name="category"
                   render={({ field }) => (
                     <Field>
-                      <FieldLabel>Featured</FieldLabel>
+                      <FieldLabel>Category</FieldLabel>
                       <FieldContent>
-                        <Switch
-                          {...field}
-                          value={field.value ? "true" : "false"}
-                          onCheckedChange={field.onChange}
-                        />
+                        <Input {...field} />
                       </FieldContent>
                     </Field>
                   )}
@@ -434,6 +430,24 @@ export default function ProjectDialog({
                       <FieldLabel>GitHub URL</FieldLabel>
                       <FieldContent>
                         <Input {...field} />
+                      </FieldContent>
+                    </Field>
+                  )}
+                />
+              </Row>
+              <Row>
+                <FormField
+                  control={form.control}
+                  name="featured"
+                  render={({ field }) => (
+                    <Field>
+                      <FieldLabel>Featured</FieldLabel>
+                      <FieldContent>
+                        <Switch
+                          {...field}
+                          value={field.value ? "true" : "false"}
+                          onCheckedChange={field.onChange}
+                        />
                       </FieldContent>
                     </Field>
                   )}
