@@ -100,10 +100,3 @@ export default async function Projects() {
     </Section>
   );
 }
-
-export async function generateStaticParams() {
-  const projectsRes = await apiClient.get("/projects");
-  return projectsRes.data.map((project: ProjectType) => ({
-    id: project.id.toString(),
-  }));
-}
