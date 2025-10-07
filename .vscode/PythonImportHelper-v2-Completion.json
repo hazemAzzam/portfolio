@@ -25,6 +25,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -242,6 +258,14 @@
         "documentation": {}
     },
     {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
         "label": "sys",
         "kind": 6,
         "isExtraImport": true,
@@ -295,6 +319,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.api.migrations.0002_project_category_alter_personalinfo_github_and_more",
+        "description": "backend.api.migrations.0002_project_category_alter_personalinfo_github_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"api\", \"0001_initial\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"project\",\n            name=\"category\",\n            field=models.CharField(default=\"\", max_length=100),\n        ),",
+        "detail": "backend.api.migrations.0002_project_category_alter_personalinfo_github_and_more",
+        "documentation": {}
+    },
+    {
         "label": "ApiConfig",
         "kind": 6,
         "importPath": "backend.api.apps",
@@ -326,7 +359,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class PersonalInfo(models.Model):\n    name = models.CharField(max_length=100, null=True, blank=True)\n    proffessionalTitle = models.CharField(max_length=100, null=True, blank=True)\n    email = models.EmailField(max_length=100, null=True, blank=True)\n    phone = models.CharField(max_length=100, null=True, blank=True)\n    address = models.CharField(max_length=100, null=True, blank=True)\n    bio = models.TextField(null=True, blank=True)\n    image = models.URLField(max_length=200, null=True, blank=True)\n    linkedin = models.URLField(max_length=100, null=True, blank=True)\n    github = models.URLField(max_length=100, null=True, blank=True)",
+        "peekOfCode": "class PersonalInfo(models.Model):\n    name = models.CharField(max_length=100, null=True, blank=True)\n    proffessionalTitle = models.CharField(max_length=100, null=True, blank=True)\n    email = models.EmailField(max_length=100, null=True, blank=True)\n    phone = models.CharField(max_length=100, null=True, blank=True)\n    address = models.CharField(max_length=100, null=True, blank=True)\n    bio = models.TextField(null=True, blank=True)\n    image = models.URLField(max_length=200, null=True, blank=True)\n    linkedin = models.CharField(max_length=100, null=True, blank=True)\n    github = models.CharField(max_length=100, null=True, blank=True)",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -335,7 +368,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class Skill(models.Model):\n    name = models.CharField(max_length=100)\n    category = models.CharField(max_length=100)\n    proficiency = models.IntegerField()\n    description = models.TextField()\nclass Project(models.Model):\n    title = models.CharField(max_length=100)\n    status = models.CharField(max_length=100)\n    description = models.TextField()\n    overview = models.TextField()",
+        "peekOfCode": "class Skill(models.Model):\n    name = models.CharField(max_length=100)\n    category = models.CharField(max_length=100)\n    proficiency = models.IntegerField()\n    description = models.TextField()\nclass Project(models.Model):\n    title = models.CharField(max_length=100)\n    status = models.CharField(max_length=100)\n    description = models.TextField()\n    category = models.CharField(max_length=100, default='')",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -344,7 +377,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class Project(models.Model):\n    title = models.CharField(max_length=100)\n    status = models.CharField(max_length=100)\n    description = models.TextField()\n    overview = models.TextField()\n    role = models.CharField(max_length=100)\n    teamSize = models.IntegerField()\n    startDate = models.DateField()\n    endDate = models.DateField(null=True, blank=True)\n    githubUrl = models.URLField(max_length=100, null=True, blank=True)",
+        "peekOfCode": "class Project(models.Model):\n    title = models.CharField(max_length=100)\n    status = models.CharField(max_length=100)\n    description = models.TextField()\n    category = models.CharField(max_length=100, default='')\n    overview = models.TextField()\n    role = models.CharField(max_length=100)\n    teamSize = models.IntegerField()\n    startDate = models.DateField()\n    endDate = models.DateField(null=True, blank=True)",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -488,7 +521,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nALLOWED_HOSTS = ['.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.environ.get('DEBUG')\nALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -497,7 +530,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "SECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nALLOWED_HOSTS = ['.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",",
+        "peekOfCode": "SECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.environ.get('DEBUG')\nALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -506,7 +539,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = ['.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",",
+        "peekOfCode": "DEBUG = os.environ.get('DEBUG')\nALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -515,7 +548,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "ALLOWED_HOSTS = ['.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    \"rest_framework\",",
+        "peekOfCode": "ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    \"rest_framework\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
