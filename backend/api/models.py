@@ -33,11 +33,11 @@ class Project(models.Model):
 
 class ProjectAchievement(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    achievement = models.CharField(max_length=500)
+    achievement = models.TextField()
 
 class ProjectChallenge(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    challenge = models.CharField(max_length=500)
+    challenge = models.TextField()
 
 class ProjectImage(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
