@@ -12,15 +12,23 @@ import { AxiosResponse } from "axios";
 import { PersonalInfoType, ProjectType, SkillType } from "@/types";
 
 export default async function Projects() {
-  const projectsRes = (await apiClient.get("/projects")) as AxiosResponse<
-    ProjectType[]
-  >;
-  const personalInfoRes = (await apiClient.get(
-    "/personal-info"
-  )) as AxiosResponse<PersonalInfoType>;
+  let projects: ProjectType[] = [];
+  let personalInfo: PersonalInfoType = {} as PersonalInfoType;
 
-  const projects: ProjectType[] = projectsRes.data;
-  const personalInfo: PersonalInfoType = personalInfoRes.data;
+  try {
+    const projectsRes = (await apiClient.get("/projects")) as AxiosResponse<
+      ProjectType[]
+    >;
+    const personalInfoRes = (await apiClient.get(
+      "/personal-info"
+    )) as AxiosResponse<PersonalInfoType>;
+
+    projects = projectsRes.data;
+    personalInfo = personalInfoRes.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    // Continue with empty arrays/objects - components should handle this gracefully
+  }
 
   return (
     <Section id="projects" className="bg-muted/30">

@@ -7,17 +7,27 @@ import Contact from "@/components/sections/Contact";
 import { apiClient } from "@/lib/api-client";
 
 export default async function page() {
-  const personalInfoRes = await apiClient.get("/personal-info");
-  const projectsRes = await apiClient.get("/projects");
+  let personalInfo = null;
+  let projects = null;
+
+  try {
+    const personalInfoRes = await apiClient.get("/personal-info");
+    const projectsRes = await apiClient.get("/projects");
+    personalInfo = personalInfoRes.data;
+    projects = projectsRes.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    // Continue with null values - components should handle this gracefully
+  }
 
   return (
     <div>
-      <Hero personalInfo={personalInfoRes.data} />
+      <Hero personalInfo={personalInfo} />
       <About />
       <Skills />
-      <Projects projects={projectsRes.data} />
+      <Projects projects={projects} />
       {/* <Experience /> */}
-      <Contact contact={personalInfoRes.data} />
+      <Contact contact={personalInfo} />
     </div>
   );
 }
