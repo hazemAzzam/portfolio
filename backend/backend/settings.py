@@ -141,11 +141,23 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS settings
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    "X-API-Key",
-    "x-api-key",
+# Get CORS origins from environment variable and clean them
+cors_origins = os.environ.get('CORS_ALLOW_ORIGINS', '').split(',')
+CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_origins] + ["http://localhost:3000"] if DEBUG else []
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'X-API-Key',
+    'x-api-key',
 ]
 
 # REST Framework settings
