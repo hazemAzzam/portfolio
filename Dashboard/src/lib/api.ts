@@ -1,12 +1,12 @@
 import axios from "axios";
-import { config } from "./config";
 
 // Create axios instance with base configuration
 export const apiClient = axios.create({
-  baseURL: config.apiUrl,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
+    "x-api-key": process.env.NEXT_PUBLIC_API_KEY,
   },
 });
 
