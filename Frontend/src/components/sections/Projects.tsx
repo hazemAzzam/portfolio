@@ -8,8 +8,13 @@ import Link from "next/link";
 import ProjectCard from "@/app/projects/components/ProjectCard";
 import { ProjectType } from "@/types";
 
-export default function Projects({ projects }: { projects: ProjectType[] }) {
-  const featuredProjects = projects.filter((project) => project.featured);
+export default function Projects({
+  projects,
+}: {
+  projects: ProjectType[] | null;
+}) {
+  const featuredProjects =
+    projects?.filter((project) => project.featured) || [];
 
   return (
     <Section id="projects" className="bg-muted/30">

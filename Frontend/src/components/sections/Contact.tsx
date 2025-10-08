@@ -21,7 +21,7 @@ const contactFormSchema = z.object({
   message: z.string(),
 });
 
-export default function Contact({ contact }: { contact: ContactType }) {
+export default function Contact({ contact }: { contact: ContactType | null }) {
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -138,7 +138,9 @@ export default function Contact({ contact }: { contact: ContactType }) {
               </div>
               <div className="text-left">
                 <h4 className="text-sm text-muted-foreground">Email</h4>
-                <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                <a href={`mailto:${contact?.email || "contact@example.com"}`}>
+                  {contact?.email || "contact@example.com"}
+                </a>
               </div>
             </div>
             <div className="flex gap-4 items-center">
@@ -148,11 +150,11 @@ export default function Contact({ contact }: { contact: ContactType }) {
               <div className="text-left">
                 <h4 className="text-sm text-muted-foreground">WhatsApp</h4>
                 <a
-                  href={`https://wa.me/${contact.phone}`}
+                  href={`https://wa.me/${contact?.phone || "+1234567890"}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {contact.phone}
+                  {contact?.phone || "+1234567890"}
                 </a>
               </div>
             </div>
@@ -162,7 +164,7 @@ export default function Contact({ contact }: { contact: ContactType }) {
               </div>
               <div className="text-left">
                 <h4 className="text-sm text-muted-foreground">Address</h4>
-                <p>{contact.address}</p>
+                <p>{contact?.address || "Cairo, Egypt"}</p>
               </div>
             </div>
           </div>
@@ -176,11 +178,13 @@ export default function Contact({ contact }: { contact: ContactType }) {
                 <div className="text-left">
                   <h4 className="text-sm text-muted-foreground">Github</h4>
                   <a
-                    href={`https://github.com/${contact.github}/`}
+                    href={`https://github.com/${
+                      contact?.github || "hazemAzzam"
+                    }/`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {contact.github}
+                    {contact?.github || "hazemAzzam"}
                   </a>
                 </div>
               </div>
@@ -191,11 +195,13 @@ export default function Contact({ contact }: { contact: ContactType }) {
                 <div className="text-left">
                   <h4 className="text-sm text-muted-foreground">LinkedIn</h4>
                   <a
-                    href={`https://www.linkedin.com/in/${contact.linkedin}/`}
+                    href={`https://www.linkedin.com/in/${
+                      contact?.linkedin || "hazemazzam"
+                    }/`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {contact.linkedin}
+                    {contact?.linkedin || "hazemazzam"}
                   </a>
                 </div>
               </div>
