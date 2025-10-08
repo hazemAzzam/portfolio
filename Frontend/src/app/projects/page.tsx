@@ -15,7 +15,6 @@ export default async function Projects() {
     {
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
       },
       next: {
         revalidate:
@@ -28,7 +27,6 @@ export default async function Projects() {
     {
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
       },
       next: {
         revalidate:
