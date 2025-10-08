@@ -12,11 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+from decouple import config
 from corsheaders.defaults import default_headers
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,14 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.vercel.app', '.now.sh']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=lambda v: [s.strip() for s in v.split(',') if s.strip()])
 
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -86,11 +82,11 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('POSTGRES_DATABASE', 'postgres'),
-        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_HOST'),
-        'PORT': os.environ.get('POSTGRES_PORT'),
+        'NAME': config('POSTGRES_DATABASE', default='postgres'),
+        'USER': config('POSTGRES_USER', default='postgres'),
+        'PASSWORD': config('POSTGRES_PASSWORD', default=''),
+        'HOST': config('POSTGRES_HOST', default='localhost'),
+        'PORT': config('POSTGRES_PORT', default=5432, cast=int),
         'OPTIONS': {
             'sslmode': 'require',
         },
@@ -143,8 +139,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOW_CREDENTIALS = True
 
 # Get CORS origins from environment variable and clean them
-cors_origins = os.environ.get('CORS_ALLOW_ORIGINS', '').split(',')
-CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_origins] + ["http://localhost:3000"] if DEBUG else []
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOW_ORIGINS', default='', cast=lambda v: [s.strip() for s in v.split(',') if s.strip()]) + (["http://localhost:3000"] if DEBUG else [])
 
 CORS_ALLOW_HEADERS = [
     'accept',
