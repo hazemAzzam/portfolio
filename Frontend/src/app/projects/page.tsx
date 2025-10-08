@@ -11,7 +11,9 @@ import { apiClient } from "@/lib/api-client";
 import { AxiosResponse } from "axios";
 import { PersonalInfoType, ProjectType, SkillType } from "@/types";
 
-export const revalidate = process.env.NEXT_PUBLIC_REVALIDATE_TIME;
+export const revalidate = parseInt(
+  process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600"
+);
 
 export default async function Projects() {
   let projects: ProjectType[] = [];

@@ -6,8 +6,9 @@ import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
 import { apiClient } from "@/lib/api-client";
 
-export const revalidate = process.env.NEXT_PUBLIC_REVALIDATE_TIME;
-
+export const revalidate = parseInt(
+  process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600"
+);
 export default async function page() {
   let personalInfo = null;
   let projects = null;
