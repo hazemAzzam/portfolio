@@ -11,10 +11,9 @@ class APIKeyAuthentication(BaseAuthentication):
     
     def authenticate(self, request):
         api_key = request.META.get('HTTP_X_API_KEY')
-        
-        if not api_key:
-            return None
-            
+
+        print("api_key", api_key)
+                   
         # Get the expected API key from environment variables
         expected_api_key = os.getenv('API_KEY')
         
