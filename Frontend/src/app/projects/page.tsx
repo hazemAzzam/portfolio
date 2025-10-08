@@ -11,6 +11,8 @@ import { apiClient } from "@/lib/api-client";
 import { AxiosResponse } from "axios";
 import { PersonalInfoType, ProjectType, SkillType } from "@/types";
 
+export const revalidate = process.env.NEXT_PUBLIC_REVALIDATE_TIME;
+
 export default async function Projects() {
   let projects: ProjectType[] = [];
   let personalInfo: PersonalInfoType = {} as PersonalInfoType;
