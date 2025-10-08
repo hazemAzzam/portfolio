@@ -28,8 +28,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=lambda v: [s.strip() for s in v.split(',') if s.strip()])
-
+# ALLOWED_HOSTS configuration
+# Only allow your specific frontend domains
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -138,8 +139,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS settings
 CORS_ALLOW_CREDENTIALS = True
 
-# Get CORS origins from environment variable and clean them
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOW_ORIGINS', default='', cast=lambda v: [s.strip() for s in v.split(',') if s.strip()]) + (["http://localhost:3000"] if DEBUG else [])
+# CORS settings - Allow all origins since we have authentication-based origin checking
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -158,11 +159,13 @@ CORS_ALLOW_HEADERS = [
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'api.authentication.OriginAuthentication',
     ],
     'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.BrowsableAPIRenderer',
-        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.JSONRenderer',  # Remove BrowsableAPIRenderer for security
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',

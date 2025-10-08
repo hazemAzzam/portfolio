@@ -3,14 +3,13 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.authentication import SessionAuthentication
 from .models import PersonalInfo, Skill, Project
 from .serializers import (
     PersonalInfoSerializer, 
     SkillSerializer, 
     ProjectSerializer
 )
-from .authentication import APIKeyAuthentication
+from .authentication import OriginAuthentication
 
 
 class PersonalInfoView(APIView):
@@ -18,6 +17,9 @@ class PersonalInfoView(APIView):
     API view for PersonalInfo - GET and UPDATE operations only.
     Since there will always be only one PersonalInfo object.
     """
+
+    authentication_classes = [OriginAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     
     def get(self, request):
         """
@@ -82,11 +84,15 @@ class PersonalInfoView(APIView):
 class SkillViewSet(viewsets.ModelViewSet):
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
+    authentication_classes = [OriginAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+    authentication_classes = [OriginAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     
     @action(detail=True, url_path='toggle-featured', methods=['post'])
     def toggle_featured(self, request, pk=None):

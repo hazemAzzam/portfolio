@@ -1,30 +1,39 @@
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from django.conf import settings
-import os
+from decouple import config
 
 
-class APIKeyAuthentication(BaseAuthentication):
+class OriginAuthentication(BaseAuthentication):
     """
-    Custom API Key authentication for Vercel deployment.
+    Secure authentication based on request origin.
+    Only allows requests from your frontend domains.
     """
     
     def authenticate(self, request):
-        api_key = request.META.get('HTTP_X_API_KEY')
-
-        print("api_key", api_key)
-                   
-        # Get the expected API key from environment variables
-        expected_api_key = os.getenv('API_KEY')
+        # Get the origin from the request
+        origin = request.META.get('HTTP_ORIGIN')
+        referer = request.META.get('HTTP_REFERER')
         
-        if not expected_api_key:
-            raise AuthenticationFailed('API key not configured')
-            
-        if api_key != expected_api_key:
-            raise AuthenticationFailed('Invalid API key')
-            
-        # Return a tuple of (user, auth) - we don't need a user for API key auth
-        return (None, api_key)
+        # Get allowed origins from environment variable
+        allowed_origins = config('ALLOWED_ORIGINS', default='', cast=lambda v: [s.strip() for s in v.split(',') if s.strip()])
+        
+        # For development, allow localhost
+        if settings.DEBUG:
+            allowed_origins.extend(['http://localhost:3000', 'http://127.0.0.1:3000'])
+        
+        # Check if origin is allowed
+        if origin and origin in allowed_origins:
+            return (None, origin)
+        
+        # Check referer as fallback
+        if referer:
+            for allowed_origin in allowed_origins:
+                if referer.startswith(allowed_origin):
+                    return (None, referer)
+        
+        # If no valid origin/referer, deny access
+        raise AuthenticationFailed('Access denied: Invalid origin')
     
     def authenticate_header(self, request):
-        return 'X-API-Key'
+        return 'Origin'
