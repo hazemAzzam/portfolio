@@ -1,36 +1,46 @@
+"use server";
+
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import React from "react";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
-import { apiClient } from "@/lib/api-client";
+import { PersonalInfoType, ProjectType } from "@/types";
 
-export const revalidate = parseInt(
-  process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600"
-);
 export default async function page() {
-  let personalInfo = null;
-  let projects = null;
-
-  try {
-    const personalInfoRes = await apiClient.get("/personal-info");
-    const projectsRes = await apiClient.get("/projects");
-    personalInfo = personalInfoRes.data;
-    projects = projectsRes.data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    // Continue with null values - components should handle this gracefully
-  }
+  const personalInfo: PersonalInfoType = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/personal-info/?format=json`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        revalidate:
+          parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
+      },
+    }
+  ).then((res) => res.json());
+  const projects: ProjectType[] = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/projects/?format=json`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        revalidate:
+          parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
+      },
+    }
+  ).then((res) => res.json());
 
   return (
-    <div>
+    <main>
       <Hero personalInfo={personalInfo} />
       <About />
       <Skills />
       <Projects projects={projects} />
-      {/* <Experience /> */}
       <Contact contact={personalInfo} />
-    </div>
+    </main>
   );
 }

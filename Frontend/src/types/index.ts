@@ -61,11 +61,11 @@ export type EducationType = {
 };
 
 export type ContactType = {
-  email: string;
-  phone: string;
-  address: string;
-  linkedin: string;
-  github: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  linkedin?: string;
+  github?: string;
 };
 
 export type ContactFormType = {

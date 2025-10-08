@@ -7,32 +7,33 @@ import { LuMail, LuGithub, LuLinkedin } from "react-icons/lu";
 import { FaWhatsapp } from "react-icons/fa";
 import { Badge } from "@/components/ui/badge";
 import ProjectCard from "./components/ProjectCard";
-import { apiClient } from "@/lib/api-client";
-import { AxiosResponse } from "axios";
 import { PersonalInfoType, ProjectType, SkillType } from "@/types";
 
-export const revalidate = parseInt(
-  process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600"
-);
-
 export default async function Projects() {
-  let projects: ProjectType[] = [];
-  let personalInfo: PersonalInfoType = {} as PersonalInfoType;
-
-  try {
-    const projectsRes = (await apiClient.get("/projects")) as AxiosResponse<
-      ProjectType[]
-    >;
-    const personalInfoRes = (await apiClient.get(
-      "/personal-info"
-    )) as AxiosResponse<PersonalInfoType>;
-
-    projects = projectsRes.data;
-    personalInfo = personalInfoRes.data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    // Continue with empty arrays/objects - components should handle this gracefully
-  }
+  const personalInfo: PersonalInfoType = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/personal-info/?format=json`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        revalidate:
+          parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
+      },
+    }
+  ).then((res) => res.json());
+  const projects: ProjectType[] = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/projects/?format=json`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        revalidate:
+          parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
+      },
+    }
+  ).then((res) => res.json());
 
   return (
     <Section id="projects" className="bg-muted/30">
