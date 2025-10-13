@@ -18,7 +18,7 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import { ImageWithFallBack } from "./ui/ImageWithFallBack";
-import { ProjectType } from "@/types";
+import { ProjectType, SkillOptionType } from "@/types";
 
 interface ProjectDetailProps {
   project: ProjectType;
@@ -146,9 +146,13 @@ export function ProjectDetail({ project, children }: ProjectDetailProps) {
               <div>
                 <h4 className="text-sm mb-2">Technologies Used</h4>
                 <div className="flex flex-wrap gap-1">
-                  {project?.technologies?.map((tech: string) => (
-                    <Badge key={tech} variant="secondary" className="text-xs">
-                      {tech}
+                  {project?.technologies?.map((tech: SkillOptionType) => (
+                    <Badge
+                      key={tech.value}
+                      variant="secondary"
+                      className="text-xs"
+                    >
+                      {tech.label}
                     </Badge>
                   ))}
                 </div>
