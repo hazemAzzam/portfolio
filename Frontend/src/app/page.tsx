@@ -2,55 +2,32 @@
 
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
-import React from "react";
+import React, { Suspense } from "react";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
 import { PersonalInfoType, ProjectType } from "@/types";
+import { fetchPersonalInfo } from "@/services/fetch-personal-info";
+import { fetchProjects } from "@/services/fetch-projects";
 
 export default async function page() {
-  const personalInfo: PersonalInfoType = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/personal-info/?format=json`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      next: {
-        revalidate:
-          parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
-      },
-    }
-  )
-    .then((res) => res.json())
-    .catch((err) => {
-      console.log(err);
-      return {} as PersonalInfoType;
-    });
-  const projects: ProjectType[] = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/projects/?format=json`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      next: {
-        revalidate:
-          parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
-      },
-    }
-  )
-    .then((res) => res.json())
-    .catch((err) => {
-      console.log(err);
-      return {} as ProjectType;
-    });
+  const personalInfoData = await fetchPersonalInfo();
+  const projectsData = await fetchProjects();
+
+  const [personalInfo, projects] = await Promise.all([
+    personalInfoData,
+    projectsData,
+  ]);
 
   return (
-    <main>
-      <Hero personalInfo={personalInfo} />
-      <About />
-      <Skills />
-      <Projects projects={projects} />
-      <Contact contact={personalInfo} />
-    </main>
+    <Suspense fallback={<div>Loading...</div>}>
+      <main>
+        <Hero personalInfo={personalInfo} />
+        <About />
+        <Skills />
+        <Projects projects={projects} />
+        <Contact contact={personalInfo} />
+      </main>
+    </Suspense>
   );
 }
