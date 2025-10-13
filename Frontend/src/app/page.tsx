@@ -2,11 +2,10 @@
 
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
-import React, { Suspense } from "react";
+import React from "react";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
-import { PersonalInfoType, ProjectType } from "@/types";
 import { fetchPersonalInfo } from "@/services/fetch-personal-info";
 import { fetchProjects } from "@/services/fetch-projects";
 
@@ -20,14 +19,12 @@ export default async function page() {
   ]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <main>
-        <Hero personalInfo={personalInfo} />
-        <About />
-        <Skills />
-        <Projects projects={projects} />
-        <Contact contact={personalInfo} />
-      </main>
-    </Suspense>
+    <main>
+      <Hero personalInfo={personalInfo} />
+      <About />
+      <Skills />
+      <Projects projects={projects} />
+      <Contact contact={personalInfo} />
+    </main>
   );
 }

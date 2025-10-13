@@ -1,16 +1,28 @@
 import { ProjectType } from "@/types";
 
-export const fetchProjects = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/`, {
-    next: {
-      revalidate:
-        parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
-    },
-  })
-    .then((res) => res.json())
-    .catch((err) => {
-      console.log(err);
-      return [] as ProjectType[];
-    });
-  return response;
+export const fetchProjects = async (): Promise<ProjectType[]> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/projects/?format=json`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        next: {
+          revalidate:
+            parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
+        },
+      }
+    );
+
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+  }
+
+  // Fallback data
+  const { PROJECTS_DATA } = await import("@/lib/data");
+  return PROJECTS_DATA;
 };
