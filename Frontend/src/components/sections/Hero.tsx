@@ -12,7 +12,7 @@ import { PersonalInfoType } from "@/types";
 export default function Hero({
   personalInfo,
 }: {
-  personalInfo: PersonalInfoType;
+  personalInfo: PersonalInfoType | null;
 }) {
   return (
     <Section id="home">
@@ -23,10 +23,10 @@ export default function Hero({
         <div>
           <Avatar className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/20">
             <AvatarImage
-              src={personalInfo.image}
-              alt={`${personalInfo.name} - ${personalInfo.proffessionalTitle}`}
+              src={personalInfo?.image}
+              alt={`${personalInfo?.name || "Developer"} - ${personalInfo?.proffessionalTitle || "Full Stack Developer"}`}
             />
-            <AvatarFallback>{personalInfo.name?.charAt(0)}</AvatarFallback>
+            <AvatarFallback>{personalInfo?.name?.charAt(0) || "D"}</AvatarFallback>
           </Avatar>
           <h1
             className={cn(
@@ -34,7 +34,7 @@ export default function Hero({
               "text-4xl md:text-6xl mb-6"
             )}
           >
-            {personalInfo.proffessionalTitle}
+            {personalInfo?.proffessionalTitle || "Full Stack Developer"}
           </h1>
           <p
             className={cn(
@@ -56,21 +56,21 @@ export default function Hero({
           </div>
           <div className="flex justify-center space-x-6 mb-12">
             <a
-              href={personalInfo.github}
+              href={personalInfo?.github || "#"}
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <LuGithub className="size-6 text-muted-foreground hover:text-foreground" />
             </a>
             <a
-              href={personalInfo.linkedin}
+              href={personalInfo?.linkedin || "#"}
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <LuLinkedin className="size-6 text-muted-foreground hover:text-foreground" />
             </a>
             <a
-              href={`mailto:${personalInfo.email}`}
+              href={`mailto:${personalInfo?.email || "contact@example.com"}`}
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >

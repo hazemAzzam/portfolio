@@ -25,13 +25,13 @@ export default async function Projects() {
         <div className={cn("lg:col-span-1", " space-y-6 self-start")}>
           <Card>
             <Avatar className="w-32 h-32 mx-auto rounded-full overflow-hidden">
-              <AvatarImage src={personalInfo.image} />
-              <AvatarFallback>{personalInfo.name?.charAt(0)}</AvatarFallback>
+              <AvatarImage src={personalInfo?.image} />
+              <AvatarFallback>{personalInfo?.name?.charAt(0) || "D"}</AvatarFallback>
             </Avatar>
             <div className="text-center">
-              <h1 className="text-2xl font-bold">{personalInfo.name}</h1>
+              <h1 className="text-2xl font-bold">{personalInfo?.name || "Developer"}</h1>
               <p className="text-muted-foreground">
-                {personalInfo.proffessionalTitle}
+                {personalInfo?.proffessionalTitle || "Full Stack Developer"}
               </p>
             </div>
           </Card>
@@ -39,7 +39,7 @@ export default async function Projects() {
             <CardHeader>About</CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                {personalInfo.bio}
+                {personalInfo?.bio || "Passionate developer with expertise in modern web technologies."}
               </p>
             </CardContent>
           </Card>
@@ -48,25 +48,23 @@ export default async function Projects() {
             <CardContent className="space-y-2">
               <p className="flex items-center text-sm  leading-relaxed">
                 <LuMail className="size-4 mr-2 text-muted-foreground" />
-                <a href={`mailto:${personalInfo.email}`}>
-                  {personalInfo.email?.split("@")[0]}
+                <a href={`mailto:${personalInfo?.email || "contact@example.com"}`}>
+                  {personalInfo?.email?.split("@")[0] || "contact"}
                 </a>
               </p>
               <p className="flex items-center text-sm  leading-relaxed">
                 <FaWhatsapp className="size-4 mr-2 text-muted-foreground" />
-                <a href={`https://wa.me/${personalInfo.phone}`}>
-                  {personalInfo.phone}
+                <a href={`https://wa.me/${personalInfo?.phone || "+1234567890"}`}>
+                  {personalInfo?.phone || "+1234567890"}
                 </a>
               </p>
               <p className="flex items-center text-sm  leading-relaxed">
                 <LuGithub className="size-4 mr-2 text-muted-foreground" />
-                <a href={`${personalInfo.github}`}>{personalInfo.github}</a>
+                <a href={`${personalInfo?.github || "#"}`}>{personalInfo?.github || "github"}</a>
               </p>
               <p className="flex items-center text-sm  leading-relaxed">
                 <LuLinkedin className="size-4 mr-2 text-muted-foreground" />
-                <a href={`${personalInfo.linkedin}`}>
-                  {personalInfo.linkedin}
-                </a>
+                <a href={`${personalInfo?.linkedin || "#"}`}>{personalInfo?.linkedin || "linkedin"}</a>
               </p>
             </CardContent>
           </Card>

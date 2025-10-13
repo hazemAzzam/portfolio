@@ -22,7 +22,6 @@ export const fetchProjects = async (): Promise<ProjectType[]> => {
     console.error("Error fetching projects:", error);
   }
 
-  // Fallback data
-  const { PROJECTS_DATA } = await import("@/lib/data");
-  return PROJECTS_DATA;
+  // Return empty array when API is unavailable
+  return [];
 };
