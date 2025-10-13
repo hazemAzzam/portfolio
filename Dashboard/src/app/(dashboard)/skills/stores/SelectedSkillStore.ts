@@ -1,4 +1,3 @@
-import { create } from "zustand";
 import { SkillType, SkillTypeWithId } from "../_types";
 import { createStore } from "@/lib/createStore";
 

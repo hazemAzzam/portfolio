@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 
 // Create axios instance with base configuration
 export const apiClient = axios.create({

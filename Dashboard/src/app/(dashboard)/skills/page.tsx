@@ -1,11 +1,11 @@
 "use client";
 
+import "@/lib/polyfills";
 import SkillDialog from "./components/SkillDialog";
 import { Code, PlusIcon } from "lucide-react";
-import React, { useMemo } from "react";
+import React from "react";
 import SkillCard from "./components/SkillCard";
 import { useSkills } from "./_hooks";
-import { SkillTypeWithId } from "./_types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 

@@ -31,7 +31,6 @@ import { toast } from "sonner";
 import { ApiError, handleApiError } from "@/lib/error-handler";
 import { SkillTypeWithId } from "../_types";
 import { Spinner } from "@/components/ui/spinner";
-import { useSelectedSkillStore } from "../stores/SelectedSkillStore";
 
 const categories = [
   "Frontend",

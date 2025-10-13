@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { z } from "zod";
 import React, { useState } from "react";
-import { format, setDate } from "date-fns";
+import { format } from "date-fns";
 import { FieldValues, useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
@@ -43,15 +43,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { CirclePlus, X } from "lucide-react";
 import { Empty, EmptyTitle } from "@/components/ui/empty";
-import { DatePicker } from "@/components/ui/date-picker";
 import { Switch } from "@/components/ui/switch";
 import {
   useCreateProject,
   useUpdateProject,
 } from "@/app/(dashboard)/projects/_hooks/use-projects";
 import { ProjectType, SkillSelectType } from "../_types/project-types";
-import { Separator } from "@/components/ui/separator";
-import { useSkillOptions, useSkills } from "../../skills/_hooks";
+import { useSkillOptions } from "../../skills/_hooks";
 import { Spinner } from "@/components/ui/spinner";
 
 const schema = z.object({

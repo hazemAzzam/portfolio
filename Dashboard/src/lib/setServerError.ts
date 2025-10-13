@@ -1,14 +1,24 @@
 import { UseFormSetError, FieldValues, Path } from "react-hook-form";
 
+interface ErrorResponse {
+  response?: {
+    data?: Record<string, string>;
+  };
+  data?: {
+    errors?: Record<string, string>;
+  };
+  message?: string;
+}
+
 export const setServerErrors = <T extends FieldValues>(
-  response: any,
-  form: { setError: UseFormSetError<T> },
+  response: ErrorResponse,
+  form: { setError: UseFormSetError<T> }
 ) => {
   console.log("Error response:", response);
   const errors =
     response?.response?.data || response?.data || response?.message;
   if (errors) {
-    console.log("Server validation errors:", response.response.data.errors);
+    console.log("Server validation errors:", response?.response?.data?.errors);
     Object.entries(errors).forEach(([field, message]) => {
       form.setError(field as Path<T>, {
         message: message as string,

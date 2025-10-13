@@ -2,14 +2,6 @@ import React from "react";
 import { SkillTypeWithId } from "../_types";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardTitle,
-} from "@/components/ui/card";
 import { Pencil, Trash } from "lucide-react";
 import {
   Item,
@@ -22,7 +14,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { useDeleteSkill } from "../_hooks";
 import SkillDialog from "./SkillDialog";
-import { useSelectedSkillStore } from "../stores/SelectedSkillStore";
 
 const proficiency = {
   1: "Beginner",
@@ -34,7 +25,6 @@ const proficiency = {
 
 export default function SkillCard({ skill }: { skill: SkillTypeWithId }) {
   const skillDeleteMutation = useDeleteSkill();
-  const { setSelectedSkill } = useSelectedSkillStore();
   return (
     <Item variant="outline" className="w-full">
       <ItemHeader>
