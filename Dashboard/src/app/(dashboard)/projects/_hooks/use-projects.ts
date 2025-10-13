@@ -10,6 +10,8 @@ import { CreateProjectType, ProjectType } from "../_types/project-types";
 const projectsApi = {
   getAll: async (): Promise<ProjectType[]> => {
     const response = await apiClient.get("/projects");
+
+    console.log(response.data);
     return response.data;
   },
 

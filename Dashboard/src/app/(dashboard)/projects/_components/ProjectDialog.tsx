@@ -11,22 +11,25 @@ import {
 } from "@/components/ui/dialog";
 import { z } from "zod";
 import React, { useState } from "react";
-import { format } from "date-fns";
+import { format, setDate } from "date-fns";
 import { FieldValues, useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField } from "@/components/ui/form";
 import Row from "@/components/ui/row";
 import {
-  Select,
+  Select as SelectUI,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { MultiSelect } from "@/components/ui/multi-select";
+
 import {
   Field,
   FieldContent,
+  FieldDescription,
   FieldError,
   FieldLabel,
 } from "@/components/ui/field";
@@ -46,7 +49,10 @@ import {
   useCreateProject,
   useUpdateProject,
 } from "@/app/(dashboard)/projects/_hooks/use-projects";
-import { ProjectType } from "../_types/project-types";
+import { ProjectType, SkillSelectType } from "../_types/project-types";
+import { Separator } from "@/components/ui/separator";
+import { useSkillOptions, useSkills } from "../../skills/_hooks";
+import { Spinner } from "@/components/ui/spinner";
 
 const schema = z.object({
   title: z.string().min(1),
@@ -55,7 +61,7 @@ const schema = z.object({
   description: z.string().min(1),
   achievements: z.array(z.string()).min(1),
   challenges: z.array(z.string()).min(1),
-  technologies: z.array(z.string()).optional(),
+  technologies: z.any().optional(),
   startDate: z.string(),
   endDate: z.string().optional(),
   role: z.string().min(1),
@@ -83,8 +89,8 @@ export default function ProjectDialog({
       description: project?.description || "",
       achievements: project?.achievements_list || [],
       challenges: project?.challenges_list || [],
-      technologies: project?.technologies || [],
-      startDate: project?.startDate || new Date().toISOString(),
+      technologies: project?.technologies,
+      startDate: project?.startDate || `${format(new Date(), "yyyy-MM-dd")}`,
       endDate: project?.endDate || "",
       role: project?.role || "",
       category: project?.category || "",
@@ -99,33 +105,37 @@ export default function ProjectDialog({
   const createProjectMutation = useCreateProject();
   const updateProjectMutation = useUpdateProject();
 
+  const isPending =
+    createProjectMutation.isPending || updateProjectMutation.isPending;
+
   const [newKeyAchievementDialog, setNewKeyAchievementDialog] = useState(false);
   const [newKeyChallengeDialog, setNewKeyChallengeDialog] = useState(false);
   const [uploadImageDialog, setUploadImageDialog] = useState(false);
 
   const onSubmit = (data: z.infer<typeof schema>) => {
-    if (newKeyAchievementDialog || newKeyChallengeDialog || uploadImageDialog) {
-      return;
-    }
-    // Format dates to YYYY-MM-DD format for Django
     const formattedData = {
       ...data,
       startDate: data.startDate
         ? format(new Date(data.startDate), "yyyy-MM-dd")
-        : undefined,
+        : "",
       endDate: data.endDate
         ? format(new Date(data.endDate), "yyyy-MM-dd")
         : undefined,
-      // Map field names to match Django backend
-      link: data.liveUrl,
+      technologies: data.technologies.map(
+        (tech: SkillSelectType) => tech.value
+      ),
     };
+
+    if (newKeyAchievementDialog || newKeyChallengeDialog || uploadImageDialog) {
+      return;
+    }
 
     if (project) {
       updateProjectMutation.mutate(
         { data: { ...formattedData, id: project.id } },
         {
-          onSuccess: () => {
-            form.reset();
+          onSuccess: (updatedProject) => {
+            form.reset(updatedProject);
           },
         }
       );
@@ -133,8 +143,8 @@ export default function ProjectDialog({
       createProjectMutation.mutate(
         { data: formattedData },
         {
-          onSuccess: () => {
-            form.reset();
+          onSuccess: (newProject) => {
+            form.reset(newProject);
           },
         }
       );
@@ -155,6 +165,8 @@ export default function ProjectDialog({
     const currentImages = form.getValues("images");
     form.setValue("images", [...currentImages, image]);
   };
+
+  const skills = useSkillOptions();
 
   return (
     <>
@@ -185,6 +197,7 @@ export default function ProjectDialog({
                 <DialogTitle>New Project</DialogTitle>
                 <DialogDescription>
                   Create a new project to showcase your work.
+                  <p>{JSON.stringify(form.formState.errors)}</p>
                 </DialogDescription>
               </DialogHeader>
               <Row>
@@ -207,7 +220,7 @@ export default function ProjectDialog({
                     <Field>
                       <FieldLabel>Status</FieldLabel>
                       <FieldContent>
-                        <Select
+                        <SelectUI
                           {...field}
                           onValueChange={field.onChange}
                           value={field.value}
@@ -223,7 +236,7 @@ export default function ProjectDialog({
                             <SelectItem value="On Hold">On Hold</SelectItem>
                             <SelectItem value="Cancelled">Cancelled</SelectItem>
                           </SelectContent>
-                        </Select>
+                        </SelectUI>
                       </FieldContent>
                     </Field>
                   )}
@@ -317,19 +330,8 @@ export default function ProjectDialog({
                     <Field>
                       <FieldLabel>Start Date</FieldLabel>
                       <FieldContent>
-                        <DatePicker
-                          value={
-                            field.value ? new Date(field.value) : undefined
-                          }
-                          onChange={(date) =>
-                            field.onChange(
-                              date
-                                ? date.toISOString()
-                                : new Date().toISOString()
-                            )
-                          }
-                          placeholder="Select start date"
-                        />
+                        <Input placeholder="Select start date" {...field} />
+                        <FieldDescription>Format: DD-MM-YYYY</FieldDescription>
                       </FieldContent>
                     </Field>
                   )}
@@ -341,21 +343,31 @@ export default function ProjectDialog({
                     <Field>
                       <FieldLabel>End Date</FieldLabel>
                       <FieldContent>
-                        <DatePicker
+                        <Input
                           disabled={["Active", "On Hold"].includes(
                             form.watch("status")
                           )}
-                          value={
-                            field.value ? new Date(field.value) : undefined
-                          }
-                          onChange={(date) =>
-                            field.onChange(
-                              date
-                                ? date.toISOString()
-                                : new Date().toISOString()
-                            )
-                          }
+                          {...field}
                           placeholder="Select end date"
+                        />
+                        <FieldDescription>Format: DD-MM-YYYY</FieldDescription>
+                      </FieldContent>
+                    </Field>
+                  )}
+                />
+              </Row>
+              <Row>
+                <FormField
+                  control={form.control}
+                  name="technologies"
+                  render={({ field }) => (
+                    <Field>
+                      <FieldLabel>Technologies</FieldLabel>
+                      <FieldContent>
+                        <MultiSelect
+                          options={skills.data || []}
+                          placeholder="Select technologies..."
+                          {...field}
                         />
                       </FieldContent>
                     </Field>
@@ -454,11 +466,9 @@ export default function ProjectDialog({
                 />
               </Row>
               <DialogFooter>
-                <Button
-                  type="submit"
-                  disabled={createProjectMutation.isPending}
-                >
-                  {createProjectMutation.isPending ? "Creating..." : "Save"}
+                <Button type="submit" disabled={isPending}>
+                  {isPending && <Spinner />}
+                  Save
                 </Button>
               </DialogFooter>
             </form>

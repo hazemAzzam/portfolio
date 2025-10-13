@@ -51,12 +51,12 @@ export default function ProjectCard({ project }: { project: ProjectType }) {
           </Button>
         </CardAction>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-2">
         <p className="text-lg text-muted-foreground">{project.overview}</p>
         <div className="flex flex-row gap-2 items-center">
           {project.technologies?.map((technology) => (
-            <Badge variant={"outline"} key={technology}>
-              {technology}
+            <Badge variant={"outline"} key={technology.value}>
+              {technology.label}
             </Badge>
           ))}
         </div>

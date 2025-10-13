@@ -26,6 +26,12 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
+import { useCreateSkill, useUpdateSkill } from "../_hooks";
+import { toast } from "sonner";
+import { ApiError, handleApiError } from "@/lib/error-handler";
+import { SkillTypeWithId } from "../_types";
+import { Spinner } from "@/components/ui/spinner";
+import { useSelectedSkillStore } from "../stores/SelectedSkillStore";
 
 const categories = [
   "Frontend",
@@ -49,37 +55,63 @@ const levelLabels = {
 const schema = z.object({
   name: z.string().min(1),
   category: z.enum(categories),
-  description: z.string().min(1),
+  description: z.string().optional(),
   proficiency: z.number().min(1).max(5),
 });
 
-export default function NewSkillDialog({
+export default function SkillDialog({
   children,
+  skill,
 }: {
   children: React.ReactNode;
+  skill?: SkillTypeWithId;
 }) {
+  const createSkillMutation = useCreateSkill();
+  const updateSkillMutation = useUpdateSkill();
+
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: "",
-      category: "Frontend",
-      description: "",
-      proficiency: 1,
+      name: skill?.name || "",
+      category: skill?.category || undefined,
+      description: skill?.description || "",
+      proficiency: skill?.proficiency || 1,
     },
   });
   const onSubmit = (data: z.infer<typeof schema>) => {
-    console.log(data);
+    if (skill) {
+      updateSkillMutation.mutate(
+        { ...data, id: skill.id },
+        {
+          onSuccess: (updatedUser) => {
+            form.reset(updatedUser);
+            toast.success("Skill updated successfully");
+          },
+          onError: (error: unknown) => {
+            handleApiError(error as ApiError, "Failed to update skill");
+          },
+        }
+      );
+    } else {
+      createSkillMutation.mutate(data, {
+        onSuccess: () => {
+          form.reset();
+          toast.success("Skill created successfully");
+        },
+        onError: (error: unknown) => {
+          handleApiError(error as ApiError, "Failed to create skill");
+        },
+      });
+    }
   };
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button>{children}</Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <DialogHeader>
-              <DialogTitle>Add Skill</DialogTitle>
+              <DialogTitle>{skill ? "Update Skill" : "Add Skill"}</DialogTitle>
             </DialogHeader>
             <Row>
               <FormField
@@ -170,7 +202,16 @@ export default function NewSkillDialog({
               />
             </Row>
             <DialogFooter>
-              <Button type="submit">Save</Button>
+              <Button
+                disabled={
+                  createSkillMutation.isPending || updateSkillMutation.isPending
+                }
+                type="submit"
+              >
+                {createSkillMutation.isPending ||
+                  (updateSkillMutation.isPending && <Spinner />)}
+                {skill ? "Update" : "Create"}
+              </Button>
             </DialogFooter>
           </form>
         </Form>

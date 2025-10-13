@@ -12,6 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Input } from "./input";
 
 interface DatePickerProps {
   value?: Date;
@@ -19,6 +20,7 @@ interface DatePickerProps {
   placeholder?: string;
   disabled?: boolean;
   className?: string;
+  control?: React.ReactNode;
 }
 
 export function DatePicker({
@@ -26,37 +28,16 @@ export function DatePicker({
   onChange,
   placeholder = "Pick a date",
   disabled = false,
+  control,
   className,
 }: DatePickerProps) {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn(
-            "w-full justify-start text-left font-normal",
-            !value && "text-muted-foreground",
-            className
-          )}
-          disabled={disabled}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {value ? format(value, "dd/MM/yyyy") : <span>{placeholder}</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
-          mode="single"
-          selected={value}
-          onSelect={(date) => {
-            onChange?.(date);
-            setOpen(false);
-          }}
-          initialFocus
-        />
-      </PopoverContent>
-    </Popover>
+    <div className="flex items-center ">
+      <div className="flex items-center gap-2">
+        <Input defaultValue={value?.toLocaleDateString("en-GB")} />
+      </div>
+    </div>
   );
 }

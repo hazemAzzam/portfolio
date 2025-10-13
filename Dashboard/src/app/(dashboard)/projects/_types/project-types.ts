@@ -6,7 +6,7 @@ export interface ProjectType {
   description: string;
   achievements_list: string[];
   challenges_list: string[];
-  technologies?: string[];
+  technologies?: SkillSelectType[];
   startDate?: string;
   endDate?: string;
   role: string;
@@ -33,4 +33,9 @@ export interface CreateProjectType
   achievements: string[];
   challenges: string[];
   images: string[];
+}
+
+export interface SkillSelectType {
+  value: string;
+  label: string;
 }
