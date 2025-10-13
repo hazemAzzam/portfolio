@@ -9,8 +9,9 @@ export const fetchProjects = async (): Promise<ProjectType[]> => {
           "Content-Type": "application/json",
         },
         next: {
-          revalidate:
-            parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
+          revalidate: parseInt(
+            process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600"
+          ),
         },
       }
     );

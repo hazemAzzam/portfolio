@@ -5,7 +5,7 @@ import { ImageWithFallBack } from "@/components/ui/ImageWithFallBack";
 import { Calendar, Eye } from "lucide-react";
 import { formatProjectDate } from "@/lib/formateProjectDate";
 import React from "react";
-import { ProjectType } from "@/types";
+import { ProjectType, SkillOptionType } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
@@ -47,9 +47,9 @@ export default function ProjectCard({
           {project.overview}
         </p>
         <div className="flex flex-wrap gap-2">
-          {project?.technologies?.map((technology: string) => (
-            <Badge key={technology} variant="outline">
-              {technology}
+          {project?.technologies?.map((technology: SkillOptionType) => (
+            <Badge key={technology.value} variant="outline">
+              {technology.label}
             </Badge>
           ))}
         </div>

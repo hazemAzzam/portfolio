@@ -6,7 +6,10 @@ import Select, { MultiValue, ActionMeta } from "react-select";
 interface MultiSelectProps {
   options: Array<{ value: string; label: string }>;
   value?: Array<{ value: string; label: string }>;
-  onChange: (selectedOptions: MultiValue<{ value: string; label: string }>, actionMeta: ActionMeta<{ value: string; label: string }>) => void;
+  onChange: (
+    selectedOptions: MultiValue<{ value: string; label: string }>,
+    actionMeta: ActionMeta<{ value: string; label: string }>
+  ) => void;
   placeholder?: string;
   className?: string;
   classNamePrefix?: string;

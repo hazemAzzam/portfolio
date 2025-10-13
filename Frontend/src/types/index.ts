@@ -19,6 +19,11 @@ export type SkillType = {
   category?: string;
 };
 
+export type SkillOptionType = {
+  value: string;
+  label: string;
+};
+
 export type TechStackType = {
   name: string;
 };
@@ -29,7 +34,7 @@ export type ProjectType = {
   overview: string;
   description: string;
   detailedDescription: string;
-  technologies?: string[];
+  technologies?: SkillOptionType[];
   startDate: string;
   endDate?: string;
   images_list: string[];

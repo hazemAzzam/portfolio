@@ -24,9 +24,13 @@ export default function Hero({
           <Avatar className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/20">
             <AvatarImage
               src={personalInfo?.image}
-              alt={`${personalInfo?.name || "Developer"} - ${personalInfo?.proffessionalTitle || "Full Stack Developer"}`}
+              alt={`${personalInfo?.name || "Developer"} - ${
+                personalInfo?.proffessionalTitle || "Full Stack Developer"
+              }`}
             />
-            <AvatarFallback>{personalInfo?.name?.charAt(0) || "D"}</AvatarFallback>
+            <AvatarFallback>
+              {personalInfo?.name?.charAt(0) || "D"}
+            </AvatarFallback>
           </Avatar>
           <h1
             className={cn(
