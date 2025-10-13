@@ -10,59 +10,40 @@ import ProjectCard from "./components/ProjectCard";
 import { PersonalInfoType, ProjectType, SkillType } from "@/types";
 
 export default async function Projects() {
-  let personalInfo: PersonalInfoType = {} as PersonalInfoType;
-  let projects: ProjectType[] = [];
-
-  try {
-    const personalInfoRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/personal-info/?format=json`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        next: {
-          revalidate:
-            parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
-        },
-      }
-    );
-    
-    if (personalInfoRes.ok) {
-      personalInfo = await personalInfoRes.json();
+  const personalInfo: PersonalInfoType = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/personal-info/?format=json`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        revalidate:
+          parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
+      },
     }
-    
-    const projectsRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/projects/?format=json`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        next: {
-          revalidate:
-            parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
-        },
-      }
-    );
-    
-    if (projectsRes.ok) {
-      projects = await projectsRes.json();
+  )
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+      return {} as PersonalInfoType;
+    });
+  const projects: ProjectType[] = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/projects/?format=json`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        revalidate:
+          parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600") || 3600,
+      },
     }
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    // Use fallback data when API is unavailable
-    const { PROJECTS_DATA } = await import("@/lib/data");
-    projects = PROJECTS_DATA;
-    personalInfo = {
-      name: "Hazem Azzam",
-      proffessionalTitle: "Full Stack Developer",
-      image: "/placeholder-avatar.jpg",
-      email: "hazem@example.com",
-      github: "hazemAzzam",
-      linkedin: "hazemazzam",
-      phone: "+1234567890",
-      address: "Cairo, Egypt"
-    } as PersonalInfoType;
-  }
+  )
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+      return {} as ProjectType;
+    });
 
   return (
     <Section id="projects" className="bg-muted/30">
