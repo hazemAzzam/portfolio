@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from decouple import config
 from corsheaders.defaults import default_headers
+import rest_framework.permissions
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -158,9 +159,9 @@ CORS_ALLOW_HEADERS = [
 
 # REST Framework settings
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    # ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'api.authentication.OriginAuthentication',
     ],

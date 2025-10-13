@@ -89,12 +89,18 @@ class ProjectSerializer(serializers.ModelSerializer):
         achievements_data = validated_data.pop('achievements', None)
         challenges_data = validated_data.pop('challenges', None)
         images_data = validated_data.pop('images', None)
-        
+        technologies_data = validated_data.pop('technologies', None)
+
         # Update project fields
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
-        
+
+
+        # Update technologies if provided
+        if technologies_data is not None:
+            instance.technologies.set(technologies_data)
+
         # Update achievements if provided
         if achievements_data is not None:
             instance.projectachievement_set.all().delete()
@@ -114,6 +120,12 @@ class ProjectSerializer(serializers.ModelSerializer):
                 ProjectImage.objects.create(project=instance, image=image_url)
         
         return instance
+
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['technologies'] = [{'value': technology.id, 'label': technology.name} for technology in instance.technologies.all()]
+        return data
     
     class Meta:
         model = Project

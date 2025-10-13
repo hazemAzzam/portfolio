@@ -16,7 +16,7 @@ class Skill(models.Model):
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     proficiency = models.IntegerField()
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     
 class Project(models.Model):
     title = models.CharField(max_length=100)
@@ -25,6 +25,7 @@ class Project(models.Model):
     category = models.CharField(max_length=100, default='')
     overview = models.TextField()
     role = models.CharField(max_length=100)
+    technologies = models.ManyToManyField(Skill, blank=True)
     teamSize = models.IntegerField()
     startDate = models.DateField()
     endDate = models.DateField(null=True, blank=True)

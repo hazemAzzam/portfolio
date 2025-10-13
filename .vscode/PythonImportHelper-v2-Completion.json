@@ -81,14 +81,6 @@
         "documentation": {}
     },
     {
-        "label": "SessionAuthentication",
-        "importPath": "rest_framework.authentication",
-        "description": "rest_framework.authentication",
-        "isExtraImport": true,
-        "detail": "rest_framework.authentication",
-        "documentation": {}
-    },
-    {
         "label": "AuthenticationFailed",
         "importPath": "rest_framework.exceptions",
         "description": "rest_framework.exceptions",
@@ -105,28 +97,44 @@
         "documentation": {}
     },
     {
+        "label": "config",
+        "importPath": "decouple",
+        "description": "decouple",
+        "isExtraImport": true,
+        "detail": "decouple",
+        "documentation": {}
+    },
+    {
+        "label": "config",
+        "importPath": "decouple",
+        "description": "decouple",
+        "isExtraImport": true,
+        "detail": "decouple",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "os",
         "description": "os",
         "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "get_wsgi_application",
-        "importPath": "django.core.wsgi",
-        "description": "django.core.wsgi",
-        "isExtraImport": true,
-        "detail": "django.core.wsgi",
-        "documentation": {}
-    },
-    {
-        "label": "get_wsgi_application",
-        "importPath": "django.core.wsgi",
-        "description": "django.core.wsgi",
-        "isExtraImport": true,
-        "detail": "django.core.wsgi",
         "documentation": {}
     },
     {
@@ -234,14 +242,6 @@
         "documentation": {}
     },
     {
-        "label": "IsAuthenticatedOrReadOnly",
-        "importPath": "rest_framework.permissions",
-        "description": "rest_framework.permissions",
-        "isExtraImport": true,
-        "detail": "rest_framework.permissions",
-        "documentation": {}
-    },
-    {
         "label": "get_asgi_application",
         "importPath": "django.core.asgi",
         "description": "django.core.asgi",
@@ -258,11 +258,20 @@
         "documentation": {}
     },
     {
-        "label": "load_dotenv",
-        "importPath": "dotenv",
-        "description": "dotenv",
+        "label": "default_headers",
+        "importPath": "corsheaders.defaults",
+        "description": "corsheaders.defaults",
         "isExtraImport": true,
-        "detail": "dotenv",
+        "detail": "corsheaders.defaults",
+        "documentation": {}
+    },
+    {
+        "label": "rest_framework.permissions",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "detail": "rest_framework.permissions",
         "documentation": {}
     },
     {
@@ -337,11 +346,11 @@
         "documentation": {}
     },
     {
-        "label": "APIKeyAuthentication",
+        "label": "OriginAuthentication",
         "kind": 6,
         "importPath": "backend.api.authentication",
         "description": "backend.api.authentication",
-        "peekOfCode": "class APIKeyAuthentication(BaseAuthentication):\n    \"\"\"\n    Custom API Key authentication for Vercel deployment.\n    \"\"\"\n    def authenticate(self, request):\n        api_key = request.META.get('HTTP_X_API_KEY')\n        if not api_key:\n            return None\n        # Get the expected API key from environment variables\n        expected_api_key = os.getenv('API_KEY')",
+        "peekOfCode": "class OriginAuthentication(BaseAuthentication):\n    \"\"\"\n    Secure authentication based on request origin.\n    Only allows requests from your frontend domains.\n    \"\"\"\n    def authenticate(self, request):\n        # Get the origin from the request\n        origin = request.META.get('HTTP_ORIGIN')\n        referer = request.META.get('HTTP_REFERER')\n        if settings.DEBUG:",
         "detail": "backend.api.authentication",
         "documentation": {}
     },
@@ -485,7 +494,7 @@
         "kind": 6,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "class PersonalInfoView(APIView):\n    \"\"\"\n    API view for PersonalInfo - GET and UPDATE operations only.\n    Since there will always be only one PersonalInfo object.\n    \"\"\"\n    authentication_classes = [APIKeyAuthentication, SessionAuthentication]\n    permission_classes = []\n    def get(self, request):\n        \"\"\"\n        Get the single PersonalInfo object. Return empty object if none exists.",
+        "peekOfCode": "class PersonalInfoView(APIView):\n    \"\"\"\n    API view for PersonalInfo - GET and UPDATE operations only.\n    Since there will always be only one PersonalInfo object.\n    \"\"\"\n    def get(self, request):\n        \"\"\"\n        Get the single PersonalInfo object. Return empty object if none exists.\n        \"\"\"\n        try:",
         "detail": "backend.api.views",
         "documentation": {}
     },
@@ -494,7 +503,7 @@
         "kind": 6,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "class SkillViewSet(viewsets.ModelViewSet):\n    queryset = Skill.objects.all()\n    serializer_class = SkillSerializer\n    authentication_classes = [APIKeyAuthentication, SessionAuthentication]\n    permission_classes = []\nclass ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    authentication_classes = [APIKeyAuthentication, SessionAuthentication]\n    permission_classes = []",
+        "peekOfCode": "class SkillViewSet(viewsets.ModelViewSet):\n    queryset = Skill.objects.all()\n    serializer_class = SkillSerializer\nclass ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    @action(detail=True, url_path='toggle-featured', methods=['post'])\n    def toggle_featured(self, request, pk=None):\n        \"\"\"\n        Toggle the featured status of a project.",
         "detail": "backend.api.views",
         "documentation": {}
     },
@@ -503,7 +512,7 @@
         "kind": 6,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "class ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    authentication_classes = [APIKeyAuthentication, SessionAuthentication]\n    permission_classes = []\n    @action(detail=True, url_path='toggle-featured', methods=['post'])\n    def toggle_featured(self, request, pk=None):\n        \"\"\"\n        Toggle the featured status of a project.\n        \"\"\"",
+        "peekOfCode": "class ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    @action(detail=True, url_path='toggle-featured', methods=['post'])\n    def toggle_featured(self, request, pk=None):\n        \"\"\"\n        Toggle the featured status of a project.\n        \"\"\"\n        project = self.get_object()\n        project.featured = not project.featured",
         "detail": "backend.api.views",
         "documentation": {}
     },
@@ -521,7 +530,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.environ.get('DEBUG')\nALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = config('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = config('DEBUG', default=False, cast=bool)\n# ALLOWED_HOSTS configuration\n# Only allow your specific frontend domains\nALLOWED_HOSTS = [\"*\"]",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -530,7 +539,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "SECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.environ.get('DEBUG')\nALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",",
+        "peekOfCode": "SECRET_KEY = config('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = config('DEBUG', default=False, cast=bool)\n# ALLOWED_HOSTS configuration\n# Only allow your specific frontend domains\nALLOWED_HOSTS = [\"*\"]\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -539,7 +548,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "DEBUG = os.environ.get('DEBUG')\nALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",",
+        "peekOfCode": "DEBUG = config('DEBUG', default=False, cast=bool)\n# ALLOWED_HOSTS configuration\n# Only allow your specific frontend domains\nALLOWED_HOSTS = [\"*\"]\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -548,7 +557,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    \"rest_framework\",",
+        "peekOfCode": "ALLOWED_HOSTS = [\"*\"]\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    \"rest_framework\",\n    \"corsheaders\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -593,7 +602,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "WSGI_APPLICATION = \"backend.wsgi.application\"\n# Database\n# https://docs.djangoproject.com/en/5.1/ref/settings/#databases\n# Database configuration - Supabase PostgreSQL\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql_psycopg2',\n        'NAME': os.environ.get('POSTGRES_DATABASE', 'postgres'),\n        'USER': os.environ.get('POSTGRES_USER', 'postgres'),\n        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),",
+        "peekOfCode": "WSGI_APPLICATION = \"backend.wsgi.application\"\n# Database\n# https://docs.djangoproject.com/en/5.1/ref/settings/#databases\n# Database configuration - Supabase PostgreSQL\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql_psycopg2',\n        'NAME': config('POSTGRES_DATABASE', default='postgres'),\n        'USER': config('POSTGRES_USER', default='postgres'),\n        'PASSWORD': config('POSTGRES_PASSWORD', default=''),",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -602,7 +611,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql_psycopg2',\n        'NAME': os.environ.get('POSTGRES_DATABASE', 'postgres'),\n        'USER': os.environ.get('POSTGRES_USER', 'postgres'),\n        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),\n        'HOST': os.environ.get('POSTGRES_HOST'),\n        'PORT': os.environ.get('POSTGRES_PORT'),\n        'OPTIONS': {\n            'sslmode': 'require',",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql_psycopg2',\n        'NAME': config('POSTGRES_DATABASE', default='postgres'),\n        'USER': config('POSTGRES_USER', default='postgres'),\n        'PASSWORD': config('POSTGRES_PASSWORD', default=''),\n        'HOST': config('POSTGRES_HOST', default='localhost'),\n        'PORT': config('POSTGRES_PORT', default=5432, cast=int),\n        'OPTIONS': {\n            'sslmode': 'require',",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -638,7 +647,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_ALL_ORIGINS = True",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_CREDENTIALS = True",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -647,7 +656,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_CREDENTIALS = True",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_CREDENTIALS = True\n# CORS settings - Allow all origins since we have authentication-based origin checking",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -656,7 +665,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "STATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_CREDENTIALS = True\n# REST Framework settings\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [",
+        "peekOfCode": "STATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_CREDENTIALS = True\n# CORS settings - Allow all origins since we have authentication-based origin checking\nCORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_HEADERS = [\n    'accept',",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -665,16 +674,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "DEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_CREDENTIALS = True\n# REST Framework settings\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_RENDERER_CLASSES': [",
-        "detail": "backend.backend.settings",
-        "documentation": {}
-    },
-    {
-        "label": "CORS_ALLOW_ALL_ORIGINS",
-        "kind": 5,
-        "importPath": "backend.backend.settings",
-        "description": "backend.backend.settings",
-        "peekOfCode": "CORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_CREDENTIALS = True\n# REST Framework settings\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_RENDERER_CLASSES': [\n        'rest_framework.renderers.BrowsableAPIRenderer',\n        'rest_framework.renderers.JSONRenderer',",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_CREDENTIALS = True\n# CORS settings - Allow all origins since we have authentication-based origin checking\nCORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_HEADERS = [\n    'accept',\n    'accept-encoding',\n    'authorization',\n    'content-type',",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -683,7 +683,25 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\n# REST Framework settings\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_RENDERER_CLASSES': [\n        'rest_framework.renderers.BrowsableAPIRenderer',\n        'rest_framework.renderers.JSONRenderer',\n    ],",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\n# CORS settings - Allow all origins since we have authentication-based origin checking\nCORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_HEADERS = [\n    'accept',\n    'accept-encoding',\n    'authorization',\n    'content-type',\n    'dnt',\n    'origin',",
+        "detail": "backend.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_ALL_ORIGINS",
+        "kind": 5,
+        "importPath": "backend.backend.settings",
+        "description": "backend.backend.settings",
+        "peekOfCode": "CORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_HEADERS = [\n    'accept',\n    'accept-encoding',\n    'authorization',\n    'content-type',\n    'dnt',\n    'origin',\n    'user-agent',\n    'x-csrftoken',",
+        "detail": "backend.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_HEADERS",
+        "kind": 5,
+        "importPath": "backend.backend.settings",
+        "description": "backend.backend.settings",
+        "peekOfCode": "CORS_ALLOW_HEADERS = [\n    'accept',\n    'accept-encoding',\n    'authorization',\n    'content-type',\n    'dnt',\n    'origin',\n    'user-agent',\n    'x-csrftoken',\n    'x-requested-with',",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -692,7 +710,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_RENDERER_CLASSES': [\n        'rest_framework.renderers.BrowsableAPIRenderer',\n        'rest_framework.renderers.JSONRenderer',\n    ],\n    'DEFAULT_PARSER_CLASSES': [\n        'rest_framework.parsers.JSONParser',",
+        "peekOfCode": "REST_FRAMEWORK = {\n    # 'DEFAULT_PERMISSION_CLASSES': [\n    #     'rest_framework.permissions.IsAuthenticatedOrReadOnly',\n    # ],\n    'DEFAULT_AUTHENTICATION_CLASSES': [\n        'api.authentication.OriginAuthentication',\n    ],\n    'DEFAULT_RENDERER_CLASSES': [\n        'rest_framework.renderers.JSONRenderer',  # Remove BrowsableAPIRenderer for security\n    ],",
         "detail": "backend.backend.settings",
         "documentation": {}
     },

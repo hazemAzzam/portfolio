@@ -15,12 +15,14 @@ class OriginAuthentication(BaseAuthentication):
         origin = request.META.get('HTTP_ORIGIN')
         referer = request.META.get('HTTP_REFERER')
         
+        if settings.DEBUG:
+            # allowed_origins.extend(['http://localhost:3000', 'http://127.0.0.1:3000'])
+            print("DEBUG MODE: Allowing all origins")
+            return (None, origin)
         # Get allowed origins from environment variable
         allowed_origins = config('ALLOWED_ORIGINS', default='', cast=lambda v: [s.strip() for s in v.split(',') if s.strip()])
         
         # For development, allow localhost
-        if settings.DEBUG:
-            allowed_origins.extend(['http://localhost:3000', 'http://127.0.0.1:3000'])
         
         # Check if origin is allowed
         if origin and origin in allowed_origins:
