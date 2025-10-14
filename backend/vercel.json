@@ -22,7 +22,7 @@
   ],
   "env": {
     "DEBUG": "False",
-    "SECRET_KEY": "@secret-key",
+    "SECRET_KEY": "@SECRET_KEY",
     "ALLOWED_HOSTS": "dashboard-seven-jade.vercel.app,portfolio-three-fawn-30.vercel.app"
   }
 }
