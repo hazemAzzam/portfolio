@@ -118,16 +118,33 @@ def login_view(request):
             'is_superuser': user.is_superuser,
             'username': user.username,
         })
-        response.set_cookie(
-            key='authToken',
-            value=str(token),
-            httponly=True,
-            secure=False,  # Set to False for development
-            samesite='Lax',  # Change from 'None' to 'Lax'
-            max_age=60 * 60 * 24,
-            path='/',
-            domain=None,  # Allow cookies for both localhost and 127.0.0.1
-        )
+        # Production vs Development cookie settings
+        from django.conf import settings
+        
+        cookie_settings = {
+            'key': 'authToken',
+            'value': str(token),
+            'httponly': True,
+            'max_age': 60 * 60 * 24,
+            'path': '/',
+        }
+        
+        if settings.DEBUG:
+            # Development settings
+            cookie_settings.update({
+                'secure': False,
+                'samesite': 'Lax',
+                'domain': None,
+            })
+        else:
+            # Production settings
+            cookie_settings.update({
+                'secure': True,
+                'samesite': 'None',  # Required for cross-origin on Vercel
+                'domain': '.vercel.app',
+            })
+        
+        response.set_cookie(**cookie_settings)
 
         print("cookies", response.cookies)
         return response

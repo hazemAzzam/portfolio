@@ -2,17 +2,27 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.py",
+      "src": "backend/wsgi.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "api/index.py"
+      "src": "/api/(.*)",
+      "dest": "backend/wsgi.py"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "backend/wsgi.py"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "backend/wsgi.py"
     }
   ],
   "env": {
-    "DJANGO_SETTINGS_MODULE": "backend.settings"
+    "DEBUG": "False",
+    "SECRET_KEY": "@secret-key",
+    "ALLOWED_HOSTS": "dashboard-seven-jade.vercel.app,portfolio-three-fawn-30.vercel.app"
   }
 }

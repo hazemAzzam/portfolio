@@ -30,8 +30,18 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 # ALLOWED_HOSTS configuration
-# Only allow your specific frontend domains
-ALLOWED_HOSTS = ["*"]
+# Production: Only allow your specific domains
+# Development: Allow all for local testing
+if DEBUG:
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = [
+        "dashboard-seven-jade.vercel.app",
+        "portfolio-three-fawn-30.vercel.app",
+        "backend-seven-jet.vercel.app",  # Replace with your backend domain
+        "localhost",  # Keep for development
+        "127.0.0.1",  # Keep for development
+    ]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -140,18 +150,58 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS settings
 CORS_ALLOW_CREDENTIALS = True
 
-# CORS settings - Use specific origins instead of allowing all
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3001",
-    "http://localhost:8000",  # Add backend localhost
-    "http://127.0.0.1:8000",  # Add backend 127.0.0.1
-]
+# CORS settings - Production vs Development
+if DEBUG:
+    # Development: Allow localhost origins
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+    ]
+else:
+    # Production: Only allow your Vercel domains
+    CORS_ALLOWED_ORIGINS = [
+        "https://dashboard-seven-jade.vercel.app",
+        "https://portfolio-three-fawn-30.vercel.app",
+    ]
 
-# Add domain to cookie settings for cross-origin requests
-SESSION_COOKIE_DOMAIN = None  # Allow cookies for localhost and 127.0.0.1
+# Security settings for production
+if not DEBUG:
+    # Production security settings
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+    
+    # Cookie security for production
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'Lax'
+    CSRF_COOKIE_SECURE = True
+    CSRF_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_SAMESITE = 'Lax'
+    
+    # Domain settings for production
+    SESSION_COOKIE_DOMAIN = '.vercel.app'  # Vercel domain
+    CSRF_TRUSTED_ORIGINS = [
+        "https://dashboard-seven-jade.vercel.app",
+        "https://portfolio-three-fawn-30.vercel.app",
+    ]
+else:
+    # Development settings
+    SESSION_COOKIE_DOMAIN = None
+    CSRF_TRUSTED_ORIGINS = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+    ]
 
 
 CORS_ALLOW_HEADERS = [

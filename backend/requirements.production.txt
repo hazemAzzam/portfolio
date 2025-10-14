@@ -1,0 +1,33 @@
+# Production Requirements
+# Install with: pip install -r requirements.production.txt
+
+# Core Django
+Django==5.1
+djangorestframework==3.16.1
+djangorestframework-simplejwt==5.5.1
+
+# CORS
+django-cors-headers==4.3.1
+
+# Environment variables
+python-decouple==3.8
+
+# Database (choose one)
+# PostgreSQL (recommended for production)
+psycopg2-binary==2.9.9
+
+# OR SQLite (for simple deployments)
+# No additional package needed
+
+# Production server
+gunicorn==21.2.0
+
+# Security
+django-environ==0.11.2
+
+# Static files
+whitenoise==6.6.0
+
+# Optional: Monitoring and logging
+# sentry-sdk==1.40.0
+# django-extensions==3.2.3
