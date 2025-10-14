@@ -141,7 +141,7 @@ def login_view(request):
             cookie_settings.update({
                 'secure': True,
                 'samesite': 'None',  # Required for cross-origin on Vercel
-                'domain': '.vercel.app',
+                'domain': None,  # Don't set domain for cross-origin cookies
             })
         
         response.set_cookie(**cookie_settings)

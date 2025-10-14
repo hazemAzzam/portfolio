@@ -188,7 +188,7 @@ if not DEBUG:
     CSRF_COOKIE_SAMESITE = 'Lax'
     
     # Domain settings for production
-    SESSION_COOKIE_DOMAIN = '.vercel.app'  # Vercel domain
+    SESSION_COOKIE_DOMAIN = None  # Don't set domain for cross-origin
     CSRF_TRUSTED_ORIGINS = [
         "https://dashboard-seven-jade.vercel.app",
         "https://portfolio-three-fawn-30.vercel.app",
