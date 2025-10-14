@@ -1,0 +1,75 @@
+"use client";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { useLogin } from "../_hooks/use-login";
+import { Spinner } from "@/components/ui/spinner";
+
+const formSchema = z.object({
+  username: z.string().min(3),
+  password: z.string().min(8),
+});
+
+export default function LoginForm() {
+  const { mutate: login, isPending } = useLogin();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
+    login(data);
+  };
+
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4 border border-border rounded-md p-4"
+      >
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem className="border border-border rounded-md p-4">
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input type="text" disabled={isPending} {...field} />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem className="border border-border rounded-md p-4">
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input type="password" disabled={isPending} {...field} />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="w-full" disabled={isPending}>
+          {isPending && <Spinner />}
+          Login
+        </Button>
+      </form>
+    </Form>
+  );
+}

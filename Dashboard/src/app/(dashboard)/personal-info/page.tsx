@@ -3,9 +3,10 @@
 import React from "react";
 import PersonalInfoForm from "./_components/PersonalInfoForm";
 import { usePersonalInfo } from "./_hooks/personal-info-hooks";
+import { redirect } from "next/navigation";
 
 export default function PersonalInfo() {
-  const { data, isLoading, error } = usePersonalInfo();
+  const { data, isLoading, error, isError } = usePersonalInfo();
 
   if (isLoading) {
     return (
@@ -15,14 +16,8 @@ export default function PersonalInfo() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="p-4">
-        <div className="text-center text-red-500">
-          Error loading personal info
-        </div>
-      </div>
-    );
+  if (isError) {
+    redirect("/login");
   }
 
   return (

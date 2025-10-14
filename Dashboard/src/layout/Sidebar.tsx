@@ -1,13 +1,20 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 import { LINKS } from "@/lib/data";
+import { cookieUtils } from "@/lib/cookies";
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const logout = () => {
+    cookieUtils.clearAuth();
+    router.push("/login");
+  };
 
   return (
     <aside className="sticky top-0 left-0 w-64 h-screen bg-sidebar">
@@ -31,6 +38,13 @@ export default function Sidebar() {
               </Link>
             </Button>
           ))}
+          <Button
+            variant="destructive"
+            className="text-start"
+            onClick={() => logout()}
+          >
+            Logout
+          </Button>
         </div>
       </div>
     </aside>
