@@ -4,14 +4,9 @@ import { redirect } from "next/navigation";
 export const requireAuth = async () => {
   const cookieStore = await cookies();
   const authToken = cookieStore.get("authToken")?.value;
+  console.log("authToken", authToken);
   if (!authToken) {
     redirect("/login");
   }
   return authToken;
-};
-
-export const logout = async () => {
-  const cookieStore = await cookies();
-  cookieStore.delete("authToken");
-  redirect("/login");
 };

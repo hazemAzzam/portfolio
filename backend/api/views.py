@@ -9,7 +9,7 @@ from .serializers import (
     SkillSerializer, 
     ProjectSerializer
 )
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import AccessToken
 from django.contrib.auth import authenticate
 
@@ -110,24 +110,35 @@ class ProjectViewSet(viewsets.ModelViewSet):
 def login_view(request):
     username = request.data.get('username')
     password = request.data.get('password')
-    print(username, password)
     user = authenticate(username=username, password=password)
-    print("user", user)
     if user is not None:
         token = AccessToken.for_user(user)
         response = Response({
             'success': True,
+            'is_superuser': user.is_superuser,
             'username': user.username,
         })
         response.set_cookie(
-            key='access_token',
+            key='authToken',
             value=str(token),
             httponly=True,
-            secure=False, # change to True in production
-            samesite='Lax',
+            secure=True, # change to True in production
+            samesite='None',
             max_age=60 * 60 * 24,
+            path='/',
         )
+
+        print("cookies", response.cookies)
         return response
     else:
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def is_authenticated_view(request):
+    return Response({
+        'is_authenticated': request.user.is_authenticated,
+        'username': request.user.username,
+        'is_superuser': request.user.is_superuser,
+        'is_staff': request.user.is_staff,
+    })

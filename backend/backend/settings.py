@@ -143,6 +143,7 @@ CORS_ALLOW_CREDENTIALS = True
 # CORS settings - Allow all origins since we have authentication-based origin checking
 CORS_ALLOW_ALL_ORIGINS = True
 
+
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -153,17 +154,16 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
-    'X-API-Key',
-    'x-api-key',
 ]
+
 
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'backend.permissions.IsAdminOrReadOnly',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'backend.authentication.CookieJWTAuthentication',
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',  # Remove BrowsableAPIRenderer for security

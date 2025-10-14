@@ -4,6 +4,7 @@ from .views import (
     PersonalInfoView,
     SkillViewSet,
     ProjectViewSet,
+    is_authenticated_view,
     login_view
 )
 
@@ -15,4 +16,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('personal-info/', PersonalInfoView.as_view(), name='personal-info'),
     path('login/', login_view, name='login'),
+    path('is-authenticated/', is_authenticated_view, name='is-authenticated'),
 ]

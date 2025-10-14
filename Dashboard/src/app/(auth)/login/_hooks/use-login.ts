@@ -14,8 +14,9 @@ export const useLogin = () => {
       username: string;
       password: string;
     }) => login(username, password),
-    onSuccess: () => {
+    onSuccess: (res) => {
       toast.success("Login successful");
+      console.log("login successful", res);
       router.push("/home");
     },
     onError: () => {

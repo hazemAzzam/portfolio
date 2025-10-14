@@ -5,14 +5,13 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 import { LINKS } from "@/lib/data";
-import { cookieUtils } from "@/lib/cookies";
 
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
   const logout = () => {
-    cookieUtils.clearAuth();
+    // cookieUtils.clearAuth();
     router.push("/login");
   };
 

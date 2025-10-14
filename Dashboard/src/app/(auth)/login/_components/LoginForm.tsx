@@ -17,8 +17,8 @@ import { useLogin } from "../_hooks/use-login";
 import { Spinner } from "@/components/ui/spinner";
 
 const formSchema = z.object({
-  username: z.string().min(3),
-  password: z.string().min(8),
+  username: z.string().min(1),
+  password: z.string().min(1),
 });
 
 export default function LoginForm() {
@@ -65,10 +65,13 @@ export default function LoginForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" disabled={isPending}>
-          {isPending && <Spinner />}
-          Login
-        </Button>
+        <div className="border border-border rounded-md p-4 flex flex-row gap-2">
+          <Button type="submit" className="flex-1" disabled={isPending}>
+            {isPending && <Spinner />}
+            Login
+          </Button>
+          <Button variant="outline">Guest Account</Button>
+        </div>
       </form>
     </Form>
   );
