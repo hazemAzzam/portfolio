@@ -122,10 +122,11 @@ def login_view(request):
             key='authToken',
             value=str(token),
             httponly=True,
-            secure=True, # change to True in production
-            samesite='None',
+            secure=False,  # Set to False for development
+            samesite='Lax',  # Change from 'None' to 'Lax'
             max_age=60 * 60 * 24,
             path='/',
+            domain=None,  # Allow cookies for both localhost and 127.0.0.1
         )
 
         print("cookies", response.cookies)

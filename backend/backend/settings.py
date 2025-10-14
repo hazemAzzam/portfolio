@@ -140,8 +140,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS settings
 CORS_ALLOW_CREDENTIALS = True
 
-# CORS settings - Allow all origins since we have authentication-based origin checking
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS settings - Use specific origins instead of allowing all
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
+    "http://localhost:8000",  # Add backend localhost
+    "http://127.0.0.1:8000",  # Add backend 127.0.0.1
+]
+
+# Add domain to cookie settings for cross-origin requests
+SESSION_COOKIE_DOMAIN = None  # Allow cookies for localhost and 127.0.0.1
 
 
 CORS_ALLOW_HEADERS = [
