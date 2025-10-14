@@ -1,4 +1,5 @@
 from rest_framework import viewsets, status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -8,6 +9,9 @@ from .serializers import (
     SkillSerializer, 
     ProjectSerializer
 )
+from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.tokens import AccessToken
+from django.contrib.auth import authenticate
 
 
 class PersonalInfoView(APIView):
@@ -100,3 +104,30 @@ class ProjectViewSet(viewsets.ModelViewSet):
             'featured': project.featured,
             'message': f'Project "{project.title}" is now {"featured" if project.featured else "not featured"}'
         }, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def login_view(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+    print(username, password)
+    user = authenticate(username=username, password=password)
+    print("user", user)
+    if user is not None:
+        token = AccessToken.for_user(user)
+        response = Response({
+            'success': True,
+            'username': user.username,
+        })
+        response.set_cookie(
+            key='access_token',
+            value=str(token),
+            httponly=True,
+            secure=False, # change to True in production
+            samesite='Lax',
+            max_age=60 * 60 * 24,
+        )
+        return response
+    else:
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
