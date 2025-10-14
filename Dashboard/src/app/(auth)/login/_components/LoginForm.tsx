@@ -32,6 +32,7 @@ export default function LoginForm() {
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
+    console.log("📝 [FORM] Submitting login form");
     login(data);
   };
 

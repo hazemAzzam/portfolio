@@ -14,12 +14,13 @@ export const useLogin = () => {
       username: string;
       password: string;
     }) => login(username, password),
-    onSuccess: (res) => {
+    onSuccess: () => {
+      console.log("✅ [LOGIN HOOK] Success, redirecting to /home");
       toast.success("Login successful");
-      console.log("login successful", res);
       router.push("/home");
     },
     onError: () => {
+      console.log("❌ [LOGIN HOOK] Login failed");
       toast.error("Login failed");
     },
   });

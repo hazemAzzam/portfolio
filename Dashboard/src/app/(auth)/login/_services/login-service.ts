@@ -1,7 +1,14 @@
 import apiClient from "@/lib/api";
 
 export const login = async (username: string, password: string) => {
-  const response = await apiClient.post("/login/", { username, password });
+  console.log("🔐 [LOGIN] Attempting login for:", username);
 
-  return response.data;
+  try {
+    const response = await apiClient.post("/login/", { username, password });
+    console.log("✅ [LOGIN] Login successful for:", username);
+    return response.data;
+  } catch (error) {
+    console.log("❌ [LOGIN] Login failed for:", username);
+    throw error;
+  }
 };
