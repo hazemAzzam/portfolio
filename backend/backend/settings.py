@@ -149,6 +149,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS settings
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = False  # Explicitly disable this to avoid conflicts
 
 # CORS settings - Production vs Development
 if DEBUG:
@@ -214,7 +215,16 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+    'cookie',  # Allow cookie header
+    'set-cookie',  # Allow set-cookie header
 ]
+
+# Additional CORS settings for production
+CORS_EXPOSE_HEADERS = [
+    'set-cookie',
+]
+
+CORS_PREFLIGHT_MAX_AGE = 86400  # 24 hours
 
 
 # REST Framework settings
