@@ -6,7 +6,7 @@ import { usePersonalInfo } from "./_hooks/personal-info-hooks";
 import { redirect } from "next/navigation";
 
 export default function PersonalInfo() {
-  const { data, isLoading, error, isError } = usePersonalInfo();
+  const { data, isLoading, isError } = usePersonalInfo();
 
   if (isLoading) {
     return (

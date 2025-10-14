@@ -25,7 +25,7 @@ export default function DashboardAuthWrapper({
         } else {
           router.push("/login");
         }
-      } catch (error) {
+      } catch {
         router.push("/login");
       } finally {
         setIsLoading(false);
