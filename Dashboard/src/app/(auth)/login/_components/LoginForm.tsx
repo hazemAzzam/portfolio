@@ -71,7 +71,16 @@ export default function LoginForm() {
             {isPending && <Spinner />}
             Login
           </Button>
-          <Button variant="outline">Guest Account</Button>
+          <Button
+            disabled={isPending}
+            onClick={() => {
+              form.setValue("username", "guest");
+              form.setValue("password", "guest");
+            }}
+            variant="outline"
+          >
+            Guest Account
+          </Button>
         </div>
       </form>
     </Form>

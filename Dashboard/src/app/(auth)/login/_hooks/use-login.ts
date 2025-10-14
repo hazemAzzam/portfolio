@@ -15,12 +15,10 @@ export const useLogin = () => {
       password: string;
     }) => login(username, password),
     onSuccess: () => {
-      console.log("✅ [LOGIN HOOK] Success, redirecting to /home");
       toast.success("Login successful");
       router.push("/home");
     },
     onError: () => {
-      console.log("❌ [LOGIN HOOK] Login failed");
       toast.error("Login failed");
     },
   });
