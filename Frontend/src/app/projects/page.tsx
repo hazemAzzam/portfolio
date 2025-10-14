@@ -10,15 +10,19 @@ import ProjectCard from "./components/ProjectCard";
 import { ProjectType, SkillType } from "@/types";
 import { fetchPersonalInfo } from "@/services/fetch-personal-info";
 import { fetchProjects } from "@/services/fetch-projects";
+import { fetchSkills } from "@/services/fetch-skills";
 
 export default async function Projects() {
   const personalInfoData = await fetchPersonalInfo();
   const projectsData = await fetchProjects();
+  const skillsData = await fetchSkills();
 
-  const [personalInfo, projects] = await Promise.all([
+  const [personalInfo, projects, skills] = await Promise.all([
     personalInfoData,
     projectsData,
+    skillsData,
   ]);
+
   return (
     <Section id="projects" className="bg-muted/30">
       <div className="grid lg:grid-cols-4 gap-8 w-full">
@@ -86,7 +90,7 @@ export default async function Projects() {
           <Card className="text-start">
             <CardHeader>Skills</CardHeader>
             <CardContent className="flex flex-wrap gap-1">
-              {personalInfo?.skills?.map((skill: SkillType) => (
+              {skills?.map((skill: SkillType) => (
                 <Badge variant="secondary" key={skill.name}>
                   {skill.name}
                 </Badge>

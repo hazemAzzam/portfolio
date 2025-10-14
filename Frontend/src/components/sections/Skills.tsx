@@ -4,8 +4,9 @@ import { motion } from "motion/react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { GlowingEffect } from "../ui/glowing-effect";
+import { SkillType } from "@/types";
 
-export default function Skills() {
+export default function Skills({ skills }: { skills: SkillType[] }) {
   const skillCategories = [
     {
       title: "Frontend Technologies",
@@ -70,27 +71,7 @@ export default function Skills() {
     },
   ];
 
-  const technologies = [
-    "React",
-    "TypeScript",
-    "Next.js",
-    "Tailwind CSS",
-    "JavaScript",
-    "HTML5",
-    "CSS3",
-    "Node.js",
-    "Git",
-    "Webpack",
-    "Vite",
-    "Figma",
-    "React Query",
-    "Zustand",
-    "GraphQL",
-    "REST APIs",
-    "Responsive Design",
-    "Accessibility",
-    "Performance Optimization",
-  ];
+  const technologies = skills.map((skill) => skill.name);
 
   return (
     <section id="skills" className="py-20">

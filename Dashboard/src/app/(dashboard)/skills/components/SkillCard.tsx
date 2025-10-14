@@ -14,14 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useDeleteSkill } from "../_hooks";
 import SkillDialog from "./SkillDialog";
-
-const proficiency = {
-  1: "Beginner",
-  2: "Beginner",
-  3: "Intermediate",
-  4: "Intermediate",
-  5: "Advanced",
-};
+import { SKILLS_PROFICIENCY } from "../_constants";
 
 export default function SkillCard({ skill }: { skill: SkillTypeWithId }) {
   const skillDeleteMutation = useDeleteSkill();
@@ -31,7 +24,11 @@ export default function SkillCard({ skill }: { skill: SkillTypeWithId }) {
         <div className="flex flex-row gap-2 items-center">
           <span className="text-xl font-bold">{skill.name}</span>
           <Badge variant="outline">
-            {proficiency[skill.proficiency as keyof typeof proficiency]}
+            {
+              SKILLS_PROFICIENCY[
+                skill.proficiency as keyof typeof SKILLS_PROFICIENCY
+              ]
+            }
           </Badge>
         </div>
       </ItemHeader>
