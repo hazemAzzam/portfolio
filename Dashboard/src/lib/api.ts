@@ -7,8 +7,7 @@ export const apiClient = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true, // Enable credentials for cookie transmission
 });
-
-axios.defaults.withCredentials = true;
 
 export default apiClient;
