@@ -60,14 +60,18 @@ export default function Hero({
           </div>
           <div className="flex justify-center space-x-6 mb-12">
             <a
-              href={personalInfo?.github || "#"}
+              href={`https://github.com/${personalInfo?.github}` || "#"}
+              target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <LuGithub className="size-6 text-muted-foreground hover:text-foreground" />
             </a>
             <a
-              href={personalInfo?.linkedin || "#"}
+              href={
+                `https://www.linkedin.com/in/${personalInfo?.linkedin}` || "#"
+              }
+              target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
@@ -75,6 +79,7 @@ export default function Hero({
             </a>
             <a
               href={`mailto:${personalInfo?.email || "contact@example.com"}`}
+              target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
