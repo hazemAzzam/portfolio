@@ -1,7 +1,16 @@
 from django.db import models
 
+class BaseModel(models.Model):
+    createdAt = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updatedAt = models.DateTimeField(auto_now=True, null=True, blank=True)
+
+    class Meta:
+        abstract = True
+        ordering = ['-createdAt']
+
+
 # Create your models here.
-class PersonalInfo(models.Model):
+class PersonalInfo(BaseModel):
     name = models.CharField(max_length=100, null=True, blank=True)
     proffessionalTitle = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(max_length=100, null=True, blank=True)
@@ -12,13 +21,13 @@ class PersonalInfo(models.Model):
     linkedin = models.CharField(max_length=100, null=True, blank=True)
     github = models.CharField(max_length=100, null=True, blank=True)
     
-class Skill(models.Model):
+class Skill(BaseModel):
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     proficiency = models.IntegerField()
     description = models.TextField(null=True, blank=True)
     
-class Project(models.Model):
+class Project(BaseModel):
     title = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     description = models.TextField()
@@ -33,14 +42,19 @@ class Project(models.Model):
     liveUrl = models.URLField(max_length=100, null=True, blank=True)
     featured = models.BooleanField(default=False)
 
-class ProjectAchievement(models.Model):
+
+class ProjectAchievement(BaseModel):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     achievement = models.TextField()
 
-class ProjectChallenge(models.Model):
+
+
+class ProjectChallenge(BaseModel):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     challenge = models.TextField()
 
-class ProjectImage(models.Model):
+
+class ProjectImage(BaseModel):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     image = models.URLField(max_length=200)
+
