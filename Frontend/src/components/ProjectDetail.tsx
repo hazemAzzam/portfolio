@@ -59,7 +59,7 @@ export function ProjectDetail({ project, children }: ProjectDetailProps) {
                       <ImageWithFallBack
                         src={image}
                         alt={`${project.title} - Image ${index + 1}`}
-                        className="w-full h-64 md:h-80 object-cover rounded-lg"
+                        className="w-full h-64 md:h-100 object-cover rounded-lg"
                       />
                     </div>
                   </CarouselItem>
