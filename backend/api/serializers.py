@@ -68,8 +68,18 @@ class ProjectSerializer(serializers.ModelSerializer):
         achievements_data = validated_data.pop('achievements', [])
         challenges_data = validated_data.pop('challenges', [])
         images_data = validated_data.pop('images', [])
+        technologies_data = validated_data.pop('technologies', None)
         
+        if validated_data.get('status') != "Completed":
+            validated_data['endDate'] = None
+
+        # Create project
+
         project = Project.objects.create(**validated_data)
+
+        # Create technologies
+        if technologies_data is not None:
+            project.technologies.set(technologies_data)
         
         # Create achievements
         for achievement_text in achievements_data:
@@ -91,10 +101,14 @@ class ProjectSerializer(serializers.ModelSerializer):
         images_data = validated_data.pop('images', None)
         technologies_data = validated_data.pop('technologies', None)
 
+        if validated_data.get('status') != "Completed":
+            validated_data['endDate'] = None
+        
         # Update project fields
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
+
 
 
         # Update technologies if provided
