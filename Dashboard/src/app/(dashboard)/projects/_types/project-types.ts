@@ -30,9 +30,9 @@ export interface CreateProjectType
     | "createdAt"
     | "updatedAt"
   > {
-  achievements: string[];
-  challenges: string[];
-  images: string[];
+  achievements?: string[];
+  challenges?: string[];
+  images?: string[];
 }
 
 export interface SkillSelectType {

@@ -48,7 +48,11 @@ import {
   useCreateProject,
   useUpdateProject,
 } from "@/app/(dashboard)/projects/_hooks/use-projects";
-import { ProjectType, SkillSelectType } from "../_types/project-types";
+import {
+  CreateProjectType,
+  ProjectType,
+  SkillSelectType,
+} from "../_types/project-types";
 import { useSkillOptions } from "../../skills/_hooks";
 import { Spinner } from "@/components/ui/spinner";
 
@@ -57,8 +61,8 @@ const schema = z.object({
   status: z.enum(["Active", "Completed", "On Hold", "Cancelled"]),
   overview: z.string().min(1),
   description: z.string().min(1),
-  achievements: z.array(z.string()).min(1),
-  challenges: z.array(z.string()).min(1),
+  achievements: z.array(z.string()).optional(),
+  challenges: z.array(z.string()).optional(),
   technologies: z.any().optional(),
   startDate: z.string(),
   endDate: z.string().optional(),
@@ -67,7 +71,7 @@ const schema = z.object({
   teamSize: z.number().optional(),
   liveUrl: z.string().optional(),
   githubUrl: z.string().optional(),
-  images: z.array(z.string()).min(1),
+  images: z.array(z.string()).optional(),
   featured: z.boolean(),
 });
 
@@ -139,7 +143,7 @@ export default function ProjectDialog({
       );
     } else {
       createProjectMutation.mutate(
-        { data: formattedData },
+        { data: formattedData as CreateProjectType },
         {
           onSuccess: (newProject) => {
             form.reset(newProject);
@@ -151,17 +155,17 @@ export default function ProjectDialog({
 
   const handleAddAchievement = (achievement: string) => {
     const currentAchievements = form.getValues("achievements");
-    form.setValue("achievements", [...currentAchievements, achievement]);
+    form.setValue("achievements", [...currentAchievements!, achievement]);
   };
 
   const handleAddChallenge = (challenge: string) => {
     const currentChallenges = form.getValues("challenges");
-    form.setValue("challenges", [...currentChallenges, challenge]);
+    form.setValue("challenges", [...currentChallenges!, challenge]);
   };
 
   const handleAddImage = (image: string) => {
     const currentImages = form.getValues("images");
-    form.setValue("images", [...currentImages, image]);
+    form.setValue("images", [...currentImages!, image]);
   };
 
   const skills = useSkillOptions();
@@ -380,7 +384,7 @@ export default function ProjectDialog({
                     <KeyDialogField
                       form={form}
                       field={field}
-                      data={field.value}
+                      data={field.value!}
                       openDialog={setNewKeyAchievementDialog}
                       title="Achievements"
                     />
@@ -395,7 +399,7 @@ export default function ProjectDialog({
                     <KeyDialogField
                       form={form}
                       field={field}
-                      data={field.value}
+                      data={field.value!}
                       openDialog={setNewKeyChallengeDialog}
                       title="Challenges"
                     />
@@ -410,7 +414,7 @@ export default function ProjectDialog({
                     <KeyDialogField
                       form={form}
                       field={field}
-                      data={field.value}
+                      data={field.value!}
                       openDialog={setUploadImageDialog}
                       title="Images"
                     />
