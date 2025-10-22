@@ -18,6 +18,10 @@ const Navbar = () => {
     // { label: "About", href: "/#about" },
     // { label: "Skills", href: "/#skills" },
     { label: "Projects", href: "/#projects" },
+    {
+      label: "Dashboard",
+      href: "https://dashboard-seven-jade.vercel.app/projects",
+    },
     // { label: "Experience", href: "/#experience" },
     // { label: "Contact", href: "/#contact" },
   ];
