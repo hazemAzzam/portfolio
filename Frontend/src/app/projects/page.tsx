@@ -13,14 +13,10 @@ import { fetchProjects } from "@/services/fetch-projects";
 import { fetchSkills } from "@/services/fetch-skills";
 
 export default async function Projects() {
-  const personalInfoData = await fetchPersonalInfo();
-  const projectsData = await fetchProjects();
-  const skillsData = await fetchSkills();
-
   const [personalInfo, projects, skills] = await Promise.all([
-    personalInfoData,
-    projectsData,
-    skillsData,
+    fetchPersonalInfo(),
+    fetchProjects(),
+    fetchSkills(),
   ]);
 
   return (

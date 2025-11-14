@@ -1,17 +1,17 @@
+"use server";
+
 import { PersonalInfoType } from "@/types";
+import { cookies } from "next/headers";
 
 export const fetchPersonalInfo = async (): Promise<PersonalInfoType | null> => {
+  cookies();
+
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/personal-info/?format=json`,
       {
         headers: {
           "Content-Type": "application/json",
-        },
-        next: {
-          revalidate: parseInt(
-            process.env.NEXT_PUBLIC_REVALIDATE_TIME || "3600"
-          ),
         },
       }
     );
