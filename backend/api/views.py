@@ -91,7 +91,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
     
     def get_permissions(self):
-        if self.action in ['create', 'delete', 'update', 'partial_update']:
+        if self.action in ['view', 'delete', 'update', 'partial_update']:
             self.permission_classes = [IsAdminUser]
         else:
             self.permission_classes = [AllowAny]
