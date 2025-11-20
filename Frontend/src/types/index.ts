@@ -28,6 +28,13 @@ export type TechStackType = {
   name: string;
 };
 
+export type MessageType = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
 export type ProjectType = {
   id: string;
   title: string;

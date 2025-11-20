@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { startTransition, useActionState } from "react";
 import { motion } from "framer-motion";
 import { Form, FormField } from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Section } from "../ui/section";
-import { z } from "zod";
+import { email, z } from "zod";
 import { useForm } from "react-hook-form";
 import { ControlledInput } from "../ui/controlled/controlled-input";
 import { Button } from "../ui/button";
@@ -13,6 +13,7 @@ import { LuGithub, LuLinkedin, LuMail, LuMapPin } from "react-icons/lu";
 import { ControlledTextarea } from "../ui/controlled/controlled-textarea";
 import { FaWhatsapp } from "react-icons/fa";
 import { ContactType } from "@/types";
+import { createMessage } from "@/services/message-services";
 
 const contactFormSchema = z.object({
   name: z.string().min(1),
@@ -22,6 +23,11 @@ const contactFormSchema = z.object({
 });
 
 export default function Contact({ contact }: { contact: ContactType | null }) {
+  const [state, formAction, pending] = useActionState(
+    (_state: void, data: FormData) => createMessage(data),
+    undefined
+  );
+
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -32,8 +38,17 @@ export default function Contact({ contact }: { contact: ContactType | null }) {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof contactFormSchema>) => {
+  const onSubmit = async (data: z.infer<typeof contactFormSchema>) => {
     console.log(data);
+
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value as string);
+    });
+
+    startTransition(() => {
+      void formAction(formData);
+    });
   };
 
   return (
@@ -117,7 +132,7 @@ export default function Contact({ contact }: { contact: ContactType | null }) {
                   />
                 )}
               />
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full" disabled={pending}>
                 Send Message
               </Button>
             </form>
