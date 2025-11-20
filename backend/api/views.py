@@ -10,7 +10,7 @@ from .serializers import (
     ProjectSerializer,
     MessageSerializer
 )
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser, BasePermission
 from rest_framework_simplejwt.tokens import AccessToken
 from django.contrib.auth import authenticate
 
@@ -85,6 +85,15 @@ class SkillViewSet(viewsets.ModelViewSet):
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
 
+class SuperuserOnly(BasePermission):
+    """
+    Allows access only to superusers.
+    """
+    message = "You must be a superuser to access this resource."
+
+    def has_permission(self, request, view):
+        return bool(request.user and request.user.is_authenticated and request.user.is_superuser)
+
 
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
@@ -92,10 +101,8 @@ class MessageViewSet(viewsets.ModelViewSet):
     
     def get_permissions(self):
         if self.action == 'create':
-            permission_classes = [AllowAny]
-        else:
-            permission_classes = [IsAdminUser]
-        return [perm() for perm in permission_classes]
+            return [AllowAny()]
+        return [SuperuserOnly()]
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
