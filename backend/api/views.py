@@ -89,7 +89,13 @@ class SkillViewSet(viewsets.ModelViewSet):
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
-    permission_classes = [IsAdminUser]
+    
+    def get_permissions(self):
+        if self.action in ['create', 'delete', 'update', 'partial_update']:
+            self.permission_classes = [IsAdminUser]
+        else:
+            self.permission_classes = [AllowAny]
+        return super().get_permissions()
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
