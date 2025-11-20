@@ -14,6 +14,7 @@ import { ControlledTextarea } from "../ui/controlled/controlled-textarea";
 import { FaWhatsapp } from "react-icons/fa";
 import { ContactType } from "@/types";
 import { createMessage } from "@/services/message-services";
+import { toast } from "sonner";
 
 const contactFormSchema = z.object({
   name: z.string().min(1),
@@ -48,6 +49,8 @@ export default function Contact({ contact }: { contact: ContactType | null }) {
 
     startTransition(() => {
       void formAction(formData);
+      toast.success("Message sent successfully!");
+      form.reset();
     });
   };
 
