@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import PersonalInfo, Skill, Project, ProjectAchievement, ProjectChallenge, ProjectImage
+from .models import PersonalInfo, Skill, Project, ProjectAchievement, ProjectChallenge, ProjectImage, Message
 
 
 class PersonalInfoSerializer(serializers.ModelSerializer):
@@ -29,6 +29,11 @@ class ProjectChallengeSerializer(serializers.ModelSerializer):
 class ProjectImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectImage
+        fields = '__all__'
+
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
         fields = '__all__'
 
 

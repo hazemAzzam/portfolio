@@ -4,6 +4,7 @@ from .views import (
     PersonalInfoView,
     SkillViewSet,
     ProjectViewSet,
+    MessageViewSet,
     is_authenticated_view,
     login_view
 )
@@ -11,6 +12,7 @@ from .views import (
 router = DefaultRouter()
 router.register(r'skills', SkillViewSet)
 router.register(r'projects', ProjectViewSet)
+router.register(r'messages', MessageViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

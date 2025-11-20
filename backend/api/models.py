@@ -58,3 +58,8 @@ class ProjectImage(BaseModel):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     image = models.URLField(max_length=200)
 
+class Message(BaseModel):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.CharField(max_length=255, blank=True, null=True)
+    subject = models.CharField(max_length=255, blank=True, null=True)
+    message = models.TextField()
