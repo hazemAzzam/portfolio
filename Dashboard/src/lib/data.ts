@@ -3,6 +3,7 @@ import {
   Code,
   FileText,
   HomeIcon,
+  MessageCircle,
   UserIcon,
 } from "lucide-react";
 
@@ -31,5 +32,10 @@ export const LINKS = [
     label: "Experience",
     href: "/experience",
     icon: FileText,
+  },
+  {
+    label: "Messages",
+    href: "/messages",
+    icon: MessageCircle,
   },
 ];
