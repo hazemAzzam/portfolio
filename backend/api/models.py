@@ -8,7 +8,6 @@ class BaseModel(models.Model):
         abstract = True
         ordering = ['-createdAt']
 
-
 # Create your models here.
 class PersonalInfo(BaseModel):
     name = models.CharField(max_length=100, null=True, blank=True)
@@ -42,6 +41,9 @@ class Project(BaseModel):
     liveUrl = models.URLField(max_length=100, null=True, blank=True)
     featured = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['-updatedAt']
+
 
 class ProjectAchievement(BaseModel):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
@@ -57,6 +59,9 @@ class ProjectChallenge(BaseModel):
 class ProjectImage(BaseModel):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     image = models.URLField(max_length=200)
+
+    class Meta:
+        ordering = ['createdAt']
 
 class Message(BaseModel):
     name = models.CharField(max_length=255, blank=True, null=True)
