@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Dashboard",
+    template: "Hazem Azzam | Dashboard",
     default: "Dashboard",
   },
   description:
@@ -34,10 +34,11 @@ export const metadata: Metadata = {
       "Professional portfolio showcasing projects, skills, and experience",
     siteName: "hazemAzzam",
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
