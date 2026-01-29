@@ -16,6 +16,7 @@ export interface ProjectType {
   githubUrl?: string;
   images_list: string[];
   featured: boolean;
+  showInPortfolio: boolean;
   createdAt: string;
   updatedAt: string;
 }

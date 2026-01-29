@@ -73,6 +73,7 @@ const schema = z.object({
   githubUrl: z.string().optional(),
   images: z.array(z.string()).optional(),
   featured: z.boolean(),
+  showInPortfolio: z.boolean(),
 });
 
 export default function ProjectDialog({
@@ -101,6 +102,7 @@ export default function ProjectDialog({
       githubUrl: project?.githubUrl || "",
       images: project?.images_list || [],
       featured: project?.featured || false,
+      showInPortfolio: project?.showInPortfolio,
     },
   });
 
@@ -456,6 +458,22 @@ export default function ProjectDialog({
                   render={({ field }) => (
                     <Field>
                       <FieldLabel>Featured</FieldLabel>
+                      <FieldContent>
+                        <Switch
+                          {...field}
+                          value={field.value ? "true" : "false"}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FieldContent>
+                    </Field>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="showInPortfolio"
+                  render={({ field }) => (
+                    <Field>
+                      <FieldLabel>Show in Portfolio</FieldLabel>
                       <FieldContent>
                         <Switch
                           {...field}

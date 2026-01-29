@@ -108,6 +108,7 @@ class MessageViewSet(viewsets.ModelViewSet):
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+    filterset_fields = ['showInPortfolio']
     
     @action(detail=True, url_path='toggle-featured', methods=['post'])
     def toggle_featured(self, request, pk=None):

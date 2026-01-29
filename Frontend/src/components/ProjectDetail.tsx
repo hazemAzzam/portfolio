@@ -53,7 +53,7 @@ export function ProjectDetail({ project, children }: ProjectDetailProps) {
           <div className="relative">
             <Carousel className="w-full">
               <CarouselContent>
-                {project.images_list.map((image, index) => (
+                {project?.images_list?.map((image, index) => (
                   <CarouselItem key={index}>
                     <div className="relative">
                       <ImageWithFallBack
@@ -65,7 +65,7 @@ export function ProjectDetail({ project, children }: ProjectDetailProps) {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              {project.images_list.length > 1 && (
+              {project?.images_list?.length > 1 && (
                 <>
                   <CarouselPrevious className="left-4" />
                   <CarouselNext className="right-4" />

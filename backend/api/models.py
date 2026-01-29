@@ -40,6 +40,7 @@ class Project(BaseModel):
     githubUrl = models.URLField(max_length=100, null=True, blank=True)
     liveUrl = models.URLField(max_length=100, null=True, blank=True)
     featured = models.BooleanField(default=False)
+    showInPortfolio = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['-updatedAt']

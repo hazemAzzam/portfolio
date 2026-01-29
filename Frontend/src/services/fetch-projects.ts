@@ -7,7 +7,7 @@ export const fetchProjects = async (): Promise<ProjectType[]> => {
   cookies();
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/projects/?format=json`,
+      `${process.env.NEXT_PUBLIC_API_URL}/projects/?format=json&showInPortfolio=true`,
       {
         headers: {
           "Content-Type": "application/json",
