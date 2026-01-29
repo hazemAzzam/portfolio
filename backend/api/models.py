@@ -43,7 +43,7 @@ class Project(BaseModel):
     showInPortfolio = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-updatedAt']
+        ordering = ['-startDate']
 
 
 class ProjectAchievement(BaseModel):

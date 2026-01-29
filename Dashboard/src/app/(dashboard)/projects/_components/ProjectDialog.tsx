@@ -460,8 +460,7 @@ export default function ProjectDialog({
                       <FieldLabel>Featured</FieldLabel>
                       <FieldContent>
                         <Switch
-                          {...field}
-                          value={field.value ? "true" : "false"}
+                          checked={field.value}
                           onCheckedChange={field.onChange}
                         />
                       </FieldContent>
@@ -476,8 +475,7 @@ export default function ProjectDialog({
                       <FieldLabel>Show in Portfolio</FieldLabel>
                       <FieldContent>
                         <Switch
-                          {...field}
-                          value={field.value ? "true" : "false"}
+                          checked={field.value}
                           onCheckedChange={field.onChange}
                         />
                       </FieldContent>
