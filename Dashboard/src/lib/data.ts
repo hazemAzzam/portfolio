@@ -29,8 +29,8 @@ export const LINKS = [
     icon: Code,
   },
   {
-    label: "Experience",
-    href: "/experience",
+    label: "Experiences",
+    href: "/experiences",
     icon: FileText,
   },
   {

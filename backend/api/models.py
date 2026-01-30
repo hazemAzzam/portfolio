@@ -19,6 +19,7 @@ class PersonalInfo(BaseModel):
     image = models.URLField(max_length=200, null=True, blank=True)
     linkedin = models.CharField(max_length=100, null=True, blank=True)
     github = models.CharField(max_length=100, null=True, blank=True)
+    current_company = models.ForeignKey('Experience', on_delete=models.CASCADE, null=True, blank=True)
     
 class Skill(BaseModel):
     name = models.CharField(max_length=100)
@@ -41,6 +42,7 @@ class Project(BaseModel):
     liveUrl = models.URLField(max_length=100, null=True, blank=True)
     featured = models.BooleanField(default=False)
     showInPortfolio = models.BooleanField(default=True)
+    experience = models.ForeignKey("Experience", on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         ordering = ['-startDate']
@@ -69,3 +71,11 @@ class Message(BaseModel):
     email = models.CharField(max_length=255, blank=True, null=True)
     subject = models.CharField(max_length=255, blank=True, null=True)
     message = models.TextField()
+
+class Experience(BaseModel):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    position = models.CharField(max_length=255, blank=True, null=True)
+    startDate = models.DateField()
+    endDate = models.DateField(null=True, blank=True)
+    location = models.JSONField(blank=True, null=True)
+    employment_type = models.CharField(max_length=255, blank=True, null=True)

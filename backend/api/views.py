@@ -3,8 +3,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import PersonalInfo, Skill, Project, Message
+from .models import Experience, PersonalInfo, Skill, Project, Message
 from .serializers import (
+    ExperienceSerializer,
     PersonalInfoSerializer, 
     SkillSerializer, 
     ProjectSerializer,
@@ -103,6 +104,10 @@ class MessageViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             return [AllowAny()]
         return [SuperuserOnly()]
+
+class ExperienceViewSet(viewsets.ModelViewSet):
+    queryset = Experience.objects.all()
+    serializer_class = ExperienceSerializer
 
 
 class ProjectViewSet(viewsets.ModelViewSet):

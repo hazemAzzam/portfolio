@@ -17,7 +17,7 @@ export default function Projects() {
           <div className="flex flex-col">
             <h2 className="text-xl font-bold">Projects</h2>
             <p className="text-muted-foreground">
-              Showcase your work and achievements
+              Showcase my work and achievements
             </p>
           </div>
           <ProjectDialog>

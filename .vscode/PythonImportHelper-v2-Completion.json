@@ -105,6 +105,102 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -315,6 +411,22 @@
         "documentation": {}
     },
     {
+        "label": "IsAdminUser",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "BasePermission",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
         "label": "AccessToken",
         "importPath": "rest_framework_simplejwt.tokens",
         "description": "rest_framework_simplejwt.tokens",
@@ -477,6 +589,69 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.api.migrations.0007_alter_personalinfo_options_alter_project_options_and_more",
+        "description": "backend.api.migrations.0007_alter_personalinfo_options_alter_project_options_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"api\", \"0006_alter_skill_description\"),\n    ]\n    operations = [\n        migrations.AlterModelOptions(\n            name=\"personalinfo\",\n            options={\"ordering\": [\"-createdAt\"]},\n        ),\n        migrations.AlterModelOptions(",
+        "detail": "backend.api.migrations.0007_alter_personalinfo_options_alter_project_options_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.api.migrations.0008_message",
+        "description": "backend.api.migrations.0008_message",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"api\", \"0007_alter_personalinfo_options_alter_project_options_and_more\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Message\",\n            fields=[\n                (\n                    \"id\",",
+        "detail": "backend.api.migrations.0008_message",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.api.migrations.0009_alter_project_options_alter_projectimage_options",
+        "description": "backend.api.migrations.0009_alter_project_options_alter_projectimage_options",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"api\", \"0008_message\"),\n    ]\n    operations = [\n        migrations.AlterModelOptions(\n            name=\"project\",\n            options={\"ordering\": [\"-updatedAt\"]},\n        ),\n        migrations.AlterModelOptions(",
+        "detail": "backend.api.migrations.0009_alter_project_options_alter_projectimage_options",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.api.migrations.0010_project_showinportfolio",
+        "description": "backend.api.migrations.0010_project_showinportfolio",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"api\", \"0009_alter_project_options_alter_projectimage_options\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"project\",\n            name=\"showInPortfolio\",\n            field=models.BooleanField(default=True),\n        ),",
+        "detail": "backend.api.migrations.0010_project_showinportfolio",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.api.migrations.0011_alter_project_options",
+        "description": "backend.api.migrations.0011_alter_project_options",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"api\", \"0010_project_showinportfolio\"),\n    ]\n    operations = [\n        migrations.AlterModelOptions(\n            name=\"project\",\n            options={\"ordering\": [\"-startDate\"]},\n        ),\n    ]",
+        "detail": "backend.api.migrations.0011_alter_project_options",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.api.migrations.0012_experience_personalinfo_current_company_and_more",
+        "description": "backend.api.migrations.0012_experience_personalinfo_current_company_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"api\", \"0011_alter_project_options\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Experience\",\n            fields=[\n                (\n                    \"id\",",
+        "detail": "backend.api.migrations.0012_experience_personalinfo_current_company_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.api.migrations.0013_experience_employment_type_experience_location",
+        "description": "backend.api.migrations.0013_experience_employment_type_experience_location",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"api\", \"0012_experience_personalinfo_current_company_and_more\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"experience\",\n            name=\"employment_type\",\n            field=models.CharField(blank=True, max_length=255, null=True),\n        ),",
+        "detail": "backend.api.migrations.0013_experience_employment_type_experience_location",
+        "documentation": {}
+    },
+    {
         "label": "ApiConfig",
         "kind": 6,
         "importPath": "backend.api.apps",
@@ -495,11 +670,20 @@
         "documentation": {}
     },
     {
+        "label": "BaseModel",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class BaseModel(models.Model):\n    createdAt = models.DateTimeField(auto_now_add=True, null=True, blank=True)\n    updatedAt = models.DateTimeField(auto_now=True, null=True, blank=True)\n    class Meta:\n        abstract = True\n        ordering = ['-createdAt']\n# Create your models here.\nclass PersonalInfo(BaseModel):\n    name = models.CharField(max_length=100, null=True, blank=True)\n    proffessionalTitle = models.CharField(max_length=100, null=True, blank=True)",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
         "label": "PersonalInfo",
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class PersonalInfo(models.Model):\n    name = models.CharField(max_length=100, null=True, blank=True)\n    proffessionalTitle = models.CharField(max_length=100, null=True, blank=True)\n    email = models.EmailField(max_length=100, null=True, blank=True)\n    phone = models.CharField(max_length=100, null=True, blank=True)\n    address = models.CharField(max_length=100, null=True, blank=True)\n    bio = models.TextField(null=True, blank=True)\n    image = models.URLField(max_length=200, null=True, blank=True)\n    linkedin = models.CharField(max_length=100, null=True, blank=True)\n    github = models.CharField(max_length=100, null=True, blank=True)",
+        "peekOfCode": "class PersonalInfo(BaseModel):\n    name = models.CharField(max_length=100, null=True, blank=True)\n    proffessionalTitle = models.CharField(max_length=100, null=True, blank=True)\n    email = models.EmailField(max_length=100, null=True, blank=True)\n    phone = models.CharField(max_length=100, null=True, blank=True)\n    address = models.CharField(max_length=100, null=True, blank=True)\n    bio = models.TextField(null=True, blank=True)\n    image = models.URLField(max_length=200, null=True, blank=True)\n    linkedin = models.CharField(max_length=100, null=True, blank=True)\n    github = models.CharField(max_length=100, null=True, blank=True)",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -508,7 +692,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class Skill(models.Model):\n    name = models.CharField(max_length=100)\n    category = models.CharField(max_length=100)\n    proficiency = models.IntegerField()\n    description = models.TextField(null=True, blank=True)\nclass Project(models.Model):\n    title = models.CharField(max_length=100)\n    status = models.CharField(max_length=100)\n    description = models.TextField()\n    category = models.CharField(max_length=100, default='')",
+        "peekOfCode": "class Skill(BaseModel):\n    name = models.CharField(max_length=100)\n    category = models.CharField(max_length=100)\n    proficiency = models.IntegerField()\n    description = models.TextField(null=True, blank=True)\nclass Project(BaseModel):\n    title = models.CharField(max_length=100)\n    status = models.CharField(max_length=100)\n    description = models.TextField()\n    category = models.CharField(max_length=100, default='')",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -517,7 +701,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class Project(models.Model):\n    title = models.CharField(max_length=100)\n    status = models.CharField(max_length=100)\n    description = models.TextField()\n    category = models.CharField(max_length=100, default='')\n    overview = models.TextField()\n    role = models.CharField(max_length=100)\n    technologies = models.ManyToManyField(Skill, blank=True)\n    teamSize = models.IntegerField()\n    startDate = models.DateField()",
+        "peekOfCode": "class Project(BaseModel):\n    title = models.CharField(max_length=100)\n    status = models.CharField(max_length=100)\n    description = models.TextField()\n    category = models.CharField(max_length=100, default='')\n    overview = models.TextField()\n    role = models.CharField(max_length=100)\n    technologies = models.ManyToManyField(Skill, blank=True)\n    teamSize = models.IntegerField()\n    startDate = models.DateField()",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -526,7 +710,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class ProjectAchievement(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    achievement = models.TextField()\nclass ProjectChallenge(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    challenge = models.TextField()\nclass ProjectImage(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    image = models.URLField(max_length=200)",
+        "peekOfCode": "class ProjectAchievement(BaseModel):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    achievement = models.TextField()\nclass ProjectChallenge(BaseModel):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    challenge = models.TextField()\nclass ProjectImage(BaseModel):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    image = models.URLField(max_length=200)\n    class Meta:",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -535,7 +719,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class ProjectChallenge(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    challenge = models.TextField()\nclass ProjectImage(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    image = models.URLField(max_length=200)",
+        "peekOfCode": "class ProjectChallenge(BaseModel):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    challenge = models.TextField()\nclass ProjectImage(BaseModel):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    image = models.URLField(max_length=200)\n    class Meta:\n        ordering = ['createdAt']\nclass Message(BaseModel):\n    name = models.CharField(max_length=255, blank=True, null=True)",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -544,7 +728,25 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class ProjectImage(models.Model):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    image = models.URLField(max_length=200)",
+        "peekOfCode": "class ProjectImage(BaseModel):\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    image = models.URLField(max_length=200)\n    class Meta:\n        ordering = ['createdAt']\nclass Message(BaseModel):\n    name = models.CharField(max_length=255, blank=True, null=True)\n    email = models.CharField(max_length=255, blank=True, null=True)\n    subject = models.CharField(max_length=255, blank=True, null=True)\n    message = models.TextField()",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Message",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class Message(BaseModel):\n    name = models.CharField(max_length=255, blank=True, null=True)\n    email = models.CharField(max_length=255, blank=True, null=True)\n    subject = models.CharField(max_length=255, blank=True, null=True)\n    message = models.TextField()\nclass Experience(BaseModel):\n    name = models.CharField(max_length=255, blank=True, null=True)\n    position = models.CharField(max_length=255, blank=True, null=True)\n    startDate = models.DateField()\n    endDate = models.DateField(null=True, blank=True)",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Experience",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class Experience(BaseModel):\n    name = models.CharField(max_length=255, blank=True, null=True)\n    position = models.CharField(max_length=255, blank=True, null=True)\n    startDate = models.DateField()\n    endDate = models.DateField(null=True, blank=True)\n    location = models.JSONField(blank=True, null=True)\n    employment_type = models.CharField(max_length=255, blank=True, null=True)",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -580,7 +782,7 @@
         "kind": 6,
         "importPath": "backend.api.serializers",
         "description": "backend.api.serializers",
-        "peekOfCode": "class ProjectChallengeSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectChallenge\n        fields = '__all__'\nclass ProjectImageSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectImage\n        fields = '__all__'\nclass ProjectSerializer(serializers.ModelSerializer):\n    achievements = serializers.ListField(",
+        "peekOfCode": "class ProjectChallengeSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectChallenge\n        fields = '__all__'\nclass ProjectImageSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectImage\n        fields = '__all__'\nclass MessageSerializer(serializers.ModelSerializer):\n    class Meta:",
         "detail": "backend.api.serializers",
         "documentation": {}
     },
@@ -589,7 +791,25 @@
         "kind": 6,
         "importPath": "backend.api.serializers",
         "description": "backend.api.serializers",
-        "peekOfCode": "class ProjectImageSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectImage\n        fields = '__all__'\nclass ProjectSerializer(serializers.ModelSerializer):\n    achievements = serializers.ListField(\n        child=serializers.CharField(),\n        write_only=True,\n        required=False\n    )",
+        "peekOfCode": "class ProjectImageSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectImage\n        fields = '__all__'\nclass MessageSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Message\n        fields = '__all__'\nclass ExperienceSerializer(serializers.ModelSerializer):\n    class Meta:",
+        "detail": "backend.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "MessageSerializer",
+        "kind": 6,
+        "importPath": "backend.api.serializers",
+        "description": "backend.api.serializers",
+        "peekOfCode": "class MessageSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Message\n        fields = '__all__'\nclass ExperienceSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Experience\n        fields = '__all__'\nclass ProjectSerializer(serializers.ModelSerializer):\n    achievements = serializers.ListField(",
+        "detail": "backend.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "ExperienceSerializer",
+        "kind": 6,
+        "importPath": "backend.api.serializers",
+        "description": "backend.api.serializers",
+        "peekOfCode": "class ExperienceSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Experience\n        fields = '__all__'\nclass ProjectSerializer(serializers.ModelSerializer):\n    achievements = serializers.ListField(\n        child=serializers.CharField(),\n        write_only=True,\n        required=False\n    )",
         "detail": "backend.api.serializers",
         "documentation": {}
     },
@@ -607,7 +827,7 @@
         "kind": 5,
         "importPath": "backend.api.urls",
         "description": "backend.api.urls",
-        "peekOfCode": "router = DefaultRouter()\nrouter.register(r'skills', SkillViewSet)\nrouter.register(r'projects', ProjectViewSet)\nurlpatterns = [\n    path('', include(router.urls)),\n    path('personal-info/', PersonalInfoView.as_view(), name='personal-info'),\n    path('login/', login_view, name='login'),\n    path('is-authenticated/', is_authenticated_view, name='is-authenticated'),\n]",
+        "peekOfCode": "router = DefaultRouter()\nrouter.register(r'skills', SkillViewSet)\nrouter.register(r'projects', ProjectViewSet)\nrouter.register(r'messages', MessageViewSet)\nrouter.register(r'experiences', ExperienceViewSet)\nurlpatterns = [\n    path('', include(router.urls)),\n    path('personal-info/', PersonalInfoView.as_view(), name='personal-info'),\n    path('login/', login_view, name='login'),\n    path('is-authenticated/', is_authenticated_view, name='is-authenticated'),",
         "detail": "backend.api.urls",
         "documentation": {}
     },
@@ -634,7 +854,34 @@
         "kind": 6,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "class SkillViewSet(viewsets.ModelViewSet):\n    queryset = Skill.objects.all()\n    serializer_class = SkillSerializer\nclass ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    @action(detail=True, url_path='toggle-featured', methods=['post'])\n    def toggle_featured(self, request, pk=None):\n        \"\"\"\n        Toggle the featured status of a project.",
+        "peekOfCode": "class SkillViewSet(viewsets.ModelViewSet):\n    queryset = Skill.objects.all()\n    serializer_class = SkillSerializer\nclass SuperuserOnly(BasePermission):\n    \"\"\"\n    Allows access only to superusers.\n    \"\"\"\n    message = \"You must be a superuser to access this resource.\"\n    def has_permission(self, request, view):\n        return bool(request.user and request.user.is_authenticated and request.user.is_superuser)",
+        "detail": "backend.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "SuperuserOnly",
+        "kind": 6,
+        "importPath": "backend.api.views",
+        "description": "backend.api.views",
+        "peekOfCode": "class SuperuserOnly(BasePermission):\n    \"\"\"\n    Allows access only to superusers.\n    \"\"\"\n    message = \"You must be a superuser to access this resource.\"\n    def has_permission(self, request, view):\n        return bool(request.user and request.user.is_authenticated and request.user.is_superuser)\nclass MessageViewSet(viewsets.ModelViewSet):\n    queryset = Message.objects.all()\n    serializer_class = MessageSerializer",
+        "detail": "backend.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "MessageViewSet",
+        "kind": 6,
+        "importPath": "backend.api.views",
+        "description": "backend.api.views",
+        "peekOfCode": "class MessageViewSet(viewsets.ModelViewSet):\n    queryset = Message.objects.all()\n    serializer_class = MessageSerializer\n    def get_permissions(self):\n        if self.action == 'create':\n            return [AllowAny()]\n        return [SuperuserOnly()]\nclass ExperienceViewSet(viewsets.ModelViewSet):\n    queryset = Experience.objects.all()\n    serializer_class = ExperienceSerializer",
+        "detail": "backend.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "ExperienceViewSet",
+        "kind": 6,
+        "importPath": "backend.api.views",
+        "description": "backend.api.views",
+        "peekOfCode": "class ExperienceViewSet(viewsets.ModelViewSet):\n    queryset = Experience.objects.all()\n    serializer_class = ExperienceSerializer\nclass ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    filterset_fields = ['showInPortfolio']\n    @action(detail=True, url_path='toggle-featured', methods=['post'])\n    def toggle_featured(self, request, pk=None):\n        \"\"\"",
         "detail": "backend.api.views",
         "documentation": {}
     },
@@ -643,7 +890,7 @@
         "kind": 6,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "class ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    @action(detail=True, url_path='toggle-featured', methods=['post'])\n    def toggle_featured(self, request, pk=None):\n        \"\"\"\n        Toggle the featured status of a project.\n        \"\"\"\n        project = self.get_object()\n        project.featured = not project.featured",
+        "peekOfCode": "class ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.all()\n    serializer_class = ProjectSerializer\n    filterset_fields = ['showInPortfolio']\n    @action(detail=True, url_path='toggle-featured', methods=['post'])\n    def toggle_featured(self, request, pk=None):\n        \"\"\"\n        Toggle the featured status of a project.\n        \"\"\"\n        project = self.get_object()",
         "detail": "backend.api.views",
         "documentation": {}
     },
@@ -724,7 +971,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "INSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    \"rest_framework\",\n    \"corsheaders\",\n    \"api\",",
+        "peekOfCode": "INSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    \"rest_framework\",\n    \"django_filters\",\n    \"corsheaders\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -814,7 +1061,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_CREDENTIALS = True\n# CORS settings - Production vs Development",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_CREDENTIALS = True\nCORS_ALLOW_ALL_ORIGINS = False  # Explicitly disable this to avoid conflicts",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -823,7 +1070,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "STATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_CREDENTIALS = True\n# CORS settings - Production vs Development\nif DEBUG:\n    # Development: Allow localhost origins\n    CORS_ALLOWED_ORIGINS = [",
+        "peekOfCode": "STATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_CREDENTIALS = True\nCORS_ALLOW_ALL_ORIGINS = False  # Explicitly disable this to avoid conflicts\n# CORS settings - Production vs Development\nif DEBUG:\n    # Development: Allow localhost origins",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -832,7 +1079,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "DEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_CREDENTIALS = True\n# CORS settings - Production vs Development\nif DEBUG:\n    # Development: Allow localhost origins\n    CORS_ALLOWED_ORIGINS = [\n        \"http://localhost:3000\",\n        \"http://127.0.0.1:3000\",\n        \"http://localhost:3001\",",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\n# CORS settings\nCORS_ALLOW_CREDENTIALS = True\nCORS_ALLOW_ALL_ORIGINS = False  # Explicitly disable this to avoid conflicts\n# CORS settings - Production vs Development\nif DEBUG:\n    # Development: Allow localhost origins\n    CORS_ALLOWED_ORIGINS = [\n        \"http://localhost:3000\",\n        \"http://127.0.0.1:3000\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -841,7 +1088,16 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\n# CORS settings - Production vs Development\nif DEBUG:\n    # Development: Allow localhost origins\n    CORS_ALLOWED_ORIGINS = [\n        \"http://localhost:3000\",\n        \"http://127.0.0.1:3000\",\n        \"http://localhost:3001\",\n        \"http://127.0.0.1:3001\",\n        \"http://localhost:8000\",",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_ALLOW_ALL_ORIGINS = False  # Explicitly disable this to avoid conflicts\n# CORS settings - Production vs Development\nif DEBUG:\n    # Development: Allow localhost origins\n    CORS_ALLOWED_ORIGINS = [\n        \"http://localhost:3000\",\n        \"http://127.0.0.1:3000\",\n        \"http://localhost:3001\",\n        \"http://127.0.0.1:3001\",",
+        "detail": "backend.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_ALL_ORIGINS",
+        "kind": 5,
+        "importPath": "backend.backend.settings",
+        "description": "backend.backend.settings",
+        "peekOfCode": "CORS_ALLOW_ALL_ORIGINS = False  # Explicitly disable this to avoid conflicts\n# CORS settings - Production vs Development\nif DEBUG:\n    # Development: Allow localhost origins\n    CORS_ALLOWED_ORIGINS = [\n        \"http://localhost:3000\",\n        \"http://127.0.0.1:3000\",\n        \"http://localhost:3001\",\n        \"http://127.0.0.1:3001\",\n        \"http://localhost:8000\",",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -851,6 +1107,24 @@
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
         "peekOfCode": "CORS_ALLOW_HEADERS = [\n    'accept',\n    'accept-encoding',\n    'authorization',\n    'content-type',\n    'dnt',\n    'origin',\n    'user-agent',\n    'x-csrftoken',\n    'x-requested-with',",
+        "detail": "backend.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_EXPOSE_HEADERS",
+        "kind": 5,
+        "importPath": "backend.backend.settings",
+        "description": "backend.backend.settings",
+        "peekOfCode": "CORS_EXPOSE_HEADERS = [\n    'set-cookie',\n]\nCORS_PREFLIGHT_MAX_AGE = 86400  # 24 hours\n# REST Framework settings\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'backend.permissions.IsAdminOrReadOnly',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': [",
+        "detail": "backend.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_PREFLIGHT_MAX_AGE",
+        "kind": 5,
+        "importPath": "backend.backend.settings",
+        "description": "backend.backend.settings",
+        "peekOfCode": "CORS_PREFLIGHT_MAX_AGE = 86400  # 24 hours\n# REST Framework settings\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'backend.permissions.IsAdminOrReadOnly',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': [\n        'backend.authentication.CookieJWTAuthentication',\n    ],\n    'DEFAULT_RENDERER_CLASSES': [",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
